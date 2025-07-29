@@ -1,6 +1,5 @@
-import React from 'react'
-import Footeritem from './Footeritem'
-import './Footer.css'
+import Footeritem from './Footeritem';
+import './Footer.css';
 import { FaArrowUp } from "react-icons/fa";
 
 export default function Footer() {

@@ -1,5 +1,4 @@
-import React from 'react'
-import Menuitem from './Menuitem'
+import Menuitem from './Menuitem';
 import { IoIosHome, IoIosInformationCircle} from "react-icons/io";
 import { RiContactsFill } from "react-icons/ri";
 import { FaFile } from "react-icons/fa";

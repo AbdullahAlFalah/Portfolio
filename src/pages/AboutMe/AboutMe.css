@@ -17,6 +17,20 @@
   position: relative; 
 }
 
+/* Responsive font size on tablet */
+@media (max-width: 768px) {
+  .about-me-text {
+    font-size: 1.5rem;
+  }
+}
+
+/* Even smaller responsive font size on phones */
+@media (max-width: 480px) {
+  .about-me-text {
+    font-size: 1.25rem;
+  }
+}
+
 .about-me-text::first-letter {
   float: left;
   font-size: 7.5rem;
@@ -25,5 +39,19 @@
   color: #4a90e2;
   /* Optional: tweak this for spacing */
   padding-right: 0px;
+}
+
+/* Responsive first-letter on tablet */
+@media (max-width: 768px) {
+  .about-me-text::first-letter {
+    font-size: 4.5rem;
+  }
+}
+
+/* Even smaller responsive first-letter on phones */
+@media (max-width: 480px) {
+  .about-me-text::first-letter {
+    font-size: 3.5rem;
+  }
 }
 

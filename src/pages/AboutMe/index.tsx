@@ -2,7 +2,7 @@ import './AboutMe.css';
 
 export default function AboutMe() {
   return (
-    <div className="about-me-container">
+    <div className="about-me-container min-h-screen px-[5vw] pb-20 sm:pb-24">
       <div className="about-me-text">
         Hi! I'm Abdullah — a passionate learner and developer building my first website. 
         I love turning ideas into functional, creative projects and constantly enjoy exploring new technologies. 

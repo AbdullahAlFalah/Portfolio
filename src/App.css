@@ -1,7 +1,7 @@
 .container {
     padding: 5%;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
+    overflow-x: hidden; /* prevent horizontal scroll */
     min-height: calc(100vh - 100px); /* Adjust height to account for header and footer */
   }
   

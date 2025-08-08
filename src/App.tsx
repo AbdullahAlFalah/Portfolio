@@ -14,7 +14,7 @@ const LandingPage: React.FC = () => {
       <div className='container'>
         <div className='image-container relative max-w-full overflow-hidden'>
           <img src={flyingscotsman} alt='ChuChu!!!' className='responsive-image w-full h-auto object-contain'></img>        
-          <p className='centered-text'>Welcome!</p>
+          <p className='centered-text text-base sm:text-lg md:text-xl'>Welcome!</p>
         </div>
         <h1 className='py-4 font-bold text-2xl text-green-700'>Professional Summary</h1>
         <p className='mb-4 font-semibold'>

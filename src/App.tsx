@@ -12,8 +12,8 @@ import './App.css';
 const LandingPage: React.FC = () => {
     return (
       <div className='container'>
-        <div className='image-container'>
-          <img src={flyingscotsman} alt='ChuChu!!!' className='responsive-image'></img>        
+        <div className='image-container relative max-w-full overflow-hidden'>
+          <img src={flyingscotsman} alt='ChuChu!!!' className='responsive-image w-full h-auto object-contain'></img>        
           <p className='centered-text'>Welcome!</p>
         </div>
         <h1 className='py-4 font-bold text-2xl text-green-700'>Professional Summary</h1>

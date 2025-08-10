@@ -14,7 +14,7 @@ export default function Header() {
         </div>
         <div className='flex gap-4 px-4'>
             <Menuitem title='Portfolio' address='/pages/Portfolio' Icon={FaFile}/> 
-            <a href="https://drive.google.com/file/d/1eKfUxItHFpj49Ub9t_ezvT0QMXlsRvxg/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center group relative">
+            <a href="https://drive.google.com/file/d/1feYTlsiiLl-DQ0N-FWO3rUMBus1bKZC6/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center group relative">
               <span className="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto">Resume</span>
               <MdAttachFile className='text-4xl sm:hidden'/>
               <p className='uppercase hidden sm:inline text-base'>Resume</p>

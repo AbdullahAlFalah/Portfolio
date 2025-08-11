@@ -3,7 +3,7 @@ import './Portfolio.css';
 
 export default function Portfolio() {
 
-  const sudokuUrl = 'https://drive.google.com/uc?export=download&id=17tbUE4yt9-6jeRc_yp0OmiGMfoglHMFl';
+  const sudokuUrl = 'https://drive.google.com/uc?export=download&id=1Lcx5HSc45mnQ3s4XUSQVQ_OxEN0MN7da';
   const mishmashUrl = 'https://drive.google.com/uc?export=download&id=';
 
   return (    

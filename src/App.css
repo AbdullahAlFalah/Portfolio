@@ -1,69 +1,128 @@
 .container {
-    padding: 5%;
-    overflow-x: hidden; /* prevent horizontal scroll */
-    min-height: calc(100vh - 100px); /* Adjust height to account for header and footer */
-  }
+  padding: 5%;
+  overflow-x: hidden; /* prevent horizontal scroll */
+  min-height: calc(100vh - 100px); /* Adjust height to account for header and footer */
+}
   
-  @keyframes float {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(20px);
-    }
-    100% {
-      transform: translateX(0);
-    }
+@keyframes float {
+  0% {
+    transform: translateX(0);
   }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
-  .image-container {
-    position: relative;
-    text-align: center;
-    /* animation: float 3s ease-in-out infinite; */
-  }
+.image-container {
+  position: relative;
+  text-align: center;
+}
 
-  .responsive-image {
-    width: 100%;
-    height: auto;
-  }
+.responsive-image {
+  width: 100%;
+  height: auto;
+}
   
-  .centered-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white; /* Adjust text color as needed */
-    background-color: rgba(0, 0, 0, 0.5); /* Optional: Background color for better readability */
-    padding: 10px; /* Optional: Padding for the text */
-    border-radius: 5px; /* Optional: Rounded corners for the text background */
+.centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Adjust text color as needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Background color for better readability */
+  padding: 10px; /* Optional: Padding for the text */
+  border-radius: 5px; /* Optional: Rounded corners for the text background */
+}
+
+@keyframes brickDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95) rotate(-10deg);
   }
+  60% {
+    opacity: 1;
+    transform: translateY(10px) scale(1.05) rotate(2deg);
+  }
+  80% {
+    transform: translateY(-5px) scale(0.98) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* Base state: hidden */
+.skill-card {
+  opacity: 0;
+}
+
+/* Optional: Add staggered animation for skill cards themselves */
+.skill-card.animate {
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.skill-card.animate:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.skill-card.animate:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.skill-card.animate:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive animation adjustments */
+@media (prefers-reduced-motion: reduce) {
+  .skill-pill {
+    animation: none;
+  }
+  .skill-card {
+    animation: none;
+  }
+}
   
 /* Footer Related */
 html, body {
-    height: 100%;
-    margin: 0;
-  }
+  height: 100%;
+  margin: 0;
+}
   
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
   
-  #root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
   
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
   
-  .footer-container {
-    position: relative;
-    bottom: 0%;
-    width: 100%
-  }
+.footer-container {
+  position: relative;
+  bottom: 0%;
+  width: 100%
+}

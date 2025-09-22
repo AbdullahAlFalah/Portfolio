@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { motion } from "framer-motion";
 import Header from './components/ui/Header';
 import Footer from './components/ui/Footer';
 import AboutMe from './pages/AboutMe';
@@ -34,6 +35,13 @@ const LandingPage: React.FC = () => {
     // Audio related refs
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [audioUnlocked, setAudioUnlocked] = useState(false);
+
+    const scrollToSection = (sectionId: string) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    };
 
     useEffect(() => {
       // Prepare audio but don’t play yet
@@ -87,24 +95,54 @@ const LandingPage: React.FC = () => {
     return (
       <div className='container px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto'>
 
+        {/* Responsive Circular Image Container */}
+        <div className='image-container mt-8 mb-8 sm:mb-12'>
+          <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+            <img 
+              src={Me} 
+              alt='Abdullah.jpg'
+              loading='lazy' 
+              className='w-full h-full object-cover'
+            />
+          </div>
+        </div>
+
         {/* Welcome Message */}
         <div className='welcome-section text-center py-8 sm:py-12 lg:py-16'>
           <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
-            Welcome to My Digital Portfolio!
+            Hi, I'm <span className='text-green-700'>Abdullah Al-Falah!</span>
           </h1>
-          <p className='text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
-            Where innovation meets creativity, and code transforms ideas into reality!
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 max-w-3xl mx-auto mb-8">
+            A Full-Stack Developer
           </p>
-        </div>
-
-        {/* Image Container */}
-        <div className='image-container relative max-w-full overflow-hidden mb-8 sm:mb-12'>
-          <img 
-            src={Me} 
-            alt='Abdullah.jpg'
-            loading='lazy' 
-            className='responsive-image w-full h-auto object-contain mx-auto block max-w-lg sm:max-w-xl lg:max-w-2xl'
-          />
+          <p className='text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed'>
+            Welcome to my portfolio! Here, you can check out my latest work and endeavors, where code transforms ideas into reality.<br />
+            I'm always open to work, feel free to "Get In Touch" with me.
+          </p>
+          <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection("MyExperience")}
+                className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
+          >
+            View My Work
+          </motion.button>
+          <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.open('https://wa.me/81704848', '_blank')}
+                className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
+          >
+            Get In Touch
+          </motion.button>
+          <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection("Skills")}
+                className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
+          >
+            Check My Skills
+          </motion.button>
         </div>
 
         {/* Professional Summary */}
@@ -138,7 +176,7 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* My Experience */}
-        <section className='mb-12 sm:mb-16 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8'>
+        <section id='MyExperience' className='mb-12 sm:mb-16 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8'>
           <h2 className='py-4 font-bold text-2xl sm:text-3xl text-green-700 mb-6'>
             My Experience
           </h2>
@@ -178,7 +216,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Skills Section */}
-        <section ref={skillsSectionRef} className='skills-section mb-12 sm:mb-16'>
+        <section id='Skills' ref={skillsSectionRef} className='skills-section mb-12 sm:mb-16'>
           <h2 className='py-4 font-bold text-2xl sm:text-3xl text-green-700 mb-8 text-center'>
             Technical Skills
           </h2>

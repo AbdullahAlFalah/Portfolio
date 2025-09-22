@@ -17,13 +17,9 @@
 }
 
 .image-container {
+  display: flex;
+  justify-content: center;
   position: relative;
-  text-align: center;
-}
-
-.responsive-image {
-  width: 100%;
-  height: auto;
 }
   
 .centered-text {

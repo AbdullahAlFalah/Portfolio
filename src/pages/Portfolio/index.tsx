@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import DownloadButton from '../../components/buttons/Download_BTN';
 import './Portfolio.css';
 
@@ -5,6 +6,16 @@ export default function Portfolio() {
 
   const sudokuUrl = 'https://drive.google.com/uc?export=download&id=14b0BwOaglA7wJNBKXxAprY2i9dXpqzM0';
   const mishmashUrl = 'https://drive.google.com/uc?export=download&id=15knquTDXZG8l4ONqbzdALO94wJ4L-5zC';
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const sectionId = window.location.hash.substring(1); // remove the #
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
 
   return (    
 
@@ -29,7 +40,7 @@ export default function Portfolio() {
             </p>
         </div>
 
-        <div className="mb-10 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8">
+        <section id='sudoku-app' className="mb-10 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8">
           <div className="text-lg sm:text-xl font-semibold">Sudoku App:</div>
           <p className="text-base sm:text-lg mb-2 text-gray-700 text-left w-full">
             This is a Sudoku game I built using vanilla React Native. It features 3 difficulty levels and a clean simple non-responsive UI.<br />
@@ -43,9 +54,9 @@ export default function Portfolio() {
             url={sudokuUrl}
             label="Download Suduko's APK"
           />
-        </div>
+        </section>
 
-        <div className="mb-10 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8">
+        <section id='mishmash-app' className="mb-10 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8">
           <div className="text-lg sm:text-xl font-semibold">MishMash App:</div>
           <p className="text-base sm:text-lg mb-2 text-gray-700 text-left w-full">
             MishMash, as the name suggests, is a mish mash of various features and functionalities. It is an Expo React Native app that showcases my skills in building complex applications.<br />
@@ -66,7 +77,7 @@ export default function Portfolio() {
             url={mishmashUrl}
             label="Download MishMash's APK"
           />
-        </div>
+        </section>
 
       </div>
 

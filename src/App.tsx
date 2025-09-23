@@ -28,6 +28,23 @@ const LandingPage: React.FC = () => {
         }
     ];
 
+    const projects = [
+      {
+        title: "Sudoku Game",
+        description: "This is a Sudoku game I built using vanilla React Native. It features 3 difficulty levels and a clean simple non-responsive UI.",
+        technologyStack: ["React Native", "JavaScript", "TypeScript"],
+        githubURL: "https://github.com/AbdullahAlFalah/SudokuGameApp",
+        demoURL: "/pages/Portfolio#sudoku-app",
+      },
+      {
+        title: "MishMash App",
+        description: "MishMash, as the name suggests, is a mish mash of various features and functionalities. It is an Expo React Native app that showcases my skills in building complex applications.",
+        technologyStack: ["React Native", "Expo", "JS/TS", "Node.js", "Express", "AWS", "MySQL", "Postgre", "Aiven"],
+        githubURL: "https://github.com/AbdullahAlFalah/first-app",
+        demoURL: "/pages/Portfolio#mishmash-app",
+      }
+    ]
+
     // Section visibility tracking
     const skillsSectionRef = useRef<HTMLDivElement>(null);
     const [inView, setInView] = useState(false);
@@ -120,26 +137,34 @@ const LandingPage: React.FC = () => {
             I'm always open to work, feel free to "Get In Touch" with me.
           </p>
           <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection("MyExperience")}
-                className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection("projects")}
+            className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
           >
             View My Work
           </motion.button>
           <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.open('https://wa.me/81704848', '_blank')}
-                className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection("MyExperience")}
+            className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
+          >
+            Check My Experience
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => window.open('https://wa.me/81704848', '_blank')}
+            className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
           >
             Get In Touch
           </motion.button>
           <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection("Skills")}
-                className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection("Skills")}
+            className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
           >
             Check My Skills
           </motion.button>
@@ -174,6 +199,81 @@ const LandingPage: React.FC = () => {
             Enable Sound
           </button>
         </div>
+
+        {/* Projects Section */}
+        <section id="projects" className="py-20">
+          <div className="container mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Featured Projects</h2>
+              <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                Here are some of my recent projects that showcase my skills and passion for development
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mx-auto max-w-5xl items-start">
+                {/* Project Card */}
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    <div className="w-full bg-muted flex justify-center items-center">
+                      <img 
+                        src={
+                          project.title === "Sudoku Game"
+                            ? `https://ik.imagekit.io/kh7xo3apt/WebImages/Sudoku.jpg?updatedAt=1758637798824`
+                            : `https://ik.imagekit.io/kh7xo3apt/WebImages/MishMash.jpg?updatedAt=1758637789305`
+                          } 
+                        alt={`Screenshot of ${project.title} project`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground mb-4">{project.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <h4 className='text-base font-semibold w-full'>Tech Stack:</h4>
+                        {project.technologyStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full text-green-700 font-semibold"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex gap-3">
+                        <a
+                          href={project.githubURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 text-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                        >
+                          Code
+                        </a>
+                        <a
+                          href={project.demoURL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 text-center px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors"
+                        >
+                          Demo
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
         {/* My Experience */}
         <section id='MyExperience' className='mb-12 sm:mb-16 flex flex-col items-start gap-3 bg-white rounded-lg shadow p-5 sm:p-8'>

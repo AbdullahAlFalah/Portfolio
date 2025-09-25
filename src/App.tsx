@@ -125,7 +125,7 @@ const LandingPage: React.FC = () => {
         </div>
 
         {/* Welcome Message */}
-        <div className='welcome-section text-center py-8 sm:py-12 lg:py-16'>
+        <div className='text-center py-8 sm:py-12 lg:py-16'>
           <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
             Hi, I'm <span className='text-green-700'>Abdullah Al-Falah!</span>
           </h1>
@@ -155,18 +155,18 @@ const LandingPage: React.FC = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://wa.me/81704848', '_blank')}
-            className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
-          >
-            Get In Touch
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection("Skills")}
             className="px-6 py-3 sm:px-8 bg-primary text-primary-foreground rounded-lg font-medium text-sm sm:text-base mx-auto"
           >
             Check My Skills
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => window.open('https://wa.me/81704848', '_blank')}
+            className="px-6 py-3 sm:px-8 border border-primary text-primary rounded-lg font-medium text-sm sm:text-base mx-auto"
+          >
+            Get In Touch
           </motion.button>
         </div>
 
@@ -184,24 +184,8 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Audio Unlock Button */}
-        <div className="mb-10 flex flex-col items-start gap-3 bg-yellow-50 rounded-lg shadow p-5 sm:p-8">
-          {/* You can hide this or style it small if you want */}
-          <div>
-            <h1 className='mb-4 text-base sm:text-lg leading-relaxed text-gray-700'>
-              Note: Please enable this feature, then scroll down to the "Technical Skills" section to experience the interactive bubble effect!
-            </h1>
-          </div>
-          <button 
-            onClick={unlockAudio}
-            className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors"
-          >
-            Enable Sound
-          </button>
-        </div>
-
         {/* Projects Section */}
-        <section id="projects" className="py-20">
+        <section id="projects" className="py-20 mb-12 sm:mb-16 bg-white rounded-lg shadow">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -314,6 +298,22 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
         </section>
+
+        {/* Audio Unlock Button */}
+        <div className="mb-10 flex flex-col items-start gap-3 bg-yellow-50 rounded-lg shadow p-5 sm:p-8">
+          {/* You can hide this or style it small if you want */}
+          <div>
+            <h1 className='mb-4 text-base sm:text-lg leading-relaxed text-gray-700'>
+              Note: Please enable this feature, then scroll down to the "Technical Skills" section to experience the interactive bubble effect!
+            </h1>
+          </div>
+          <button 
+            onClick={unlockAudio}
+            className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors"
+          >
+            Enable Sound
+          </button>
+        </div>
 
         {/* Skills Section */}
         <section id='Skills' ref={skillsSectionRef} className='skills-section mb-12 sm:mb-16'>

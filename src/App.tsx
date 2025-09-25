@@ -181,6 +181,19 @@ const LandingPage: React.FC = () => {
               Passionate about building innovative solutions and delivering high-quality content, I bring a strong technical foundation and a creative mindset to every project. 
               I thrive on tackling challenges, contributing to impactful projects, and continuously expanding my expertise in the ever-evolving tech industry.
             </p>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href = {"/pages/AboutMe"}
+              className='
+                px-6 py-3 sm:px-8 border border-primary
+                text-primary-foreground rounded-lg font-medium 
+                text-sm sm:text-base mx-auto
+                inline-flex
+                '
+            >
+              More About Me
+            </motion.a>
           </div>
         </section>
 

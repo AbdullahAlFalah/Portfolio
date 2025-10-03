@@ -1,8 +1,20 @@
 import './AboutMe.css';
-import Me from '../../assets/Abdullah.jpg';
+import Me from '../../assets/images/Abdullah.jpg';
 import { motion } from 'framer-motion';
 
 const socialSkillsData = [
+  {
+    title: "Web Development",
+    skills: ["HTML", "CSS", "React", "JavaScript/TypeScript", "Tailwind", "Vercel"]
+  },
+  {
+    title: "Mobile Development", 
+    skills: ["React Native", "Expo", "JavaScript/TypeScript", "UI/UX", "Debugging", "Firebase"]
+  },
+  {
+    title: "Backend Development",
+    skills: ["Node.js", "Express.js", "Python", "Flask", "REST", "MySQL", "PostgreSQL", "MongoDB Atlas", "AWS", "Aiven", "Render", "GitHub"]
+  },
   {
     title: "Social Skills",
     skills: ["Focused Listening", "Collaboration", "Conflict Resolution", "Adaptability"]
@@ -13,7 +25,7 @@ const socialSkillsData = [
   },
   {
     title: "In-progress Skills",
-    skills: ["Python", "FastAPI", "Flask", "Docker"]
+    skills: ["FastAPI", "Docker"]
   },
   {
     title: "Hobbies",
@@ -45,16 +57,16 @@ export default function AboutMe() {
                 max-w-xs sm:max-w-sm w-full 
                 object-cover 
                 rounded-xl 
-                ring-4 ring-primary ring-offset-8 ring-offset-white/80 
+                ring-4 ring-primary-border ring-offset-8 ring-offset-white/80 
                 shadow-lg 
                 transition-transform duration-300 hover:scale-[1.02]
               '
             />
 
             <div className='
-              bg-blue-200
+              bg-green-300
               rounded-xl 
-              ring-4 ring-primary ring-offset-8 ring-offset-white/80 
+              ring-4 ring-primary-border ring-offset-8 ring-offset-white/80 
               shadow-lg 
               '
             >
@@ -72,7 +84,7 @@ export default function AboutMe() {
                     {category.skills.map((skill, skillIndex) => (
                       <span 
                         key={skillIndex}
-                        className='bg-blue-100 text-blue-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium hover:bg-blue-200 transform hover:scale-105 transition-colors duration-200 cursor-default'
+                        className='bg-green-100 text-green-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium hover:bg-green-200 transform hover:scale-105 transition-colors duration-200 cursor-default'
                       >
                         {skill}
                       </span>

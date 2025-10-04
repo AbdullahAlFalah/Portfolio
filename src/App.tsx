@@ -150,38 +150,43 @@ const LandingPage: React.FC = () => {
             Welcome to my portfolio! Here, you can check out my latest work and endeavors, where code transforms ideas into reality.<br />
             I'm always open to work, feel free to "Get In Touch" with me.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("projects")}
-            className="px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
-          >
-            View My Work
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("MyExperience")}
-            className="px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
-          >
-            Check My Experience
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("Skills")}
-            className="px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
-          >
-            Check My Skills
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://wa.me/81704848', '_blank')}
-            className="px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
-          >
-            Get In Touch
-          </motion.button>
+
+          {/* buttons: group with gap; each button uses relative + hover:z to avoid covering neighbors */}
+          <div className="flex flex-wrap justify-center gap-6 isolate">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => scrollToSection("projects")}
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+            >
+              View My Work
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => scrollToSection("MyExperience")}
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+            >
+              Check My Experience
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => scrollToSection("Skills")}
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+            >
+              Check My Skills
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('https://wa.me/81704848', '_blank')}
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+            >
+              Get In Touch
+            </motion.button>
+          </div>
+          
         </div>
 
         {/* Professional Summary */}

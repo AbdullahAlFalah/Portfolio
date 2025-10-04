@@ -1,3 +1,18 @@
+/* subtle page background */
+.about-page { background: transparent; }
+
+/* photo wrapper tweaks */
+.photo-wrap { box-shadow: 0 10px 30px rgba(2,6,23,0.08); }
+
+.header-text {
+  font-size: 1rem;
+}
+
+/* responsive small tweaks */
+@media (max-width: 768px) {
+  .photo-wrap { width: 96px; height: 96px; }
+}
+
 .about-me-text {
   font-size: 1.75rem;
   text-align: left;

@@ -57,7 +57,6 @@ export default function AboutMe() {
               className="flex justify-center lg:justify-end"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl blur-2xl opacity-20 pointer-events-none"></div>
 
                 <div className="photo-wrap w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-2xl overflow-hidden shadow-lg">
                   <img 

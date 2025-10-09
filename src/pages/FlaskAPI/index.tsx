@@ -1,9 +1,7 @@
-
+import MovieWithComments from '../../components/form/Moviesandcomments';
 
 export default function FlaskAPI() {
     return (
-        <p>
-            Flask API Demo Page
-        </p>
+        <MovieWithComments />
     );
 }

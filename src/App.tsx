@@ -152,7 +152,7 @@ const LandingPage: React.FC = () => {
           </p>
 
           {/* buttons: group with gap; each button uses relative + hover:z to avoid covering neighbors */}
-          <div className="flex flex-wrap justify-center gap-6 isolate">
+          <div className="flex flex-wrap justify-center gap-4 isolate">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

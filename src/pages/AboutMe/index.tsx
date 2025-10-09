@@ -154,7 +154,7 @@ export default function AboutMe() {
                     break-inside-avoid
                     p-4 sm:p-6 mb-4 sm:mb-6
                     border border-gray-100 hover:shadow-xl transition-shadow duration-300
-                    inline-block
+                    block
                   `}
                 >
                   <h4 className='text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6 text-center'>

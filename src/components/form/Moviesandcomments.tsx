@@ -104,7 +104,10 @@ const MovieWithComments = () => {
   if (loadingMovies) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading movies...</div>
+        <div className="text-white text-xl">
+          <p>Loading movies...<br /></p>
+          <p>If the backend is sleeping it will take about 30 to 70 seconds to awake...</p>
+        </div>
       </div>
     );
   }
@@ -170,14 +173,14 @@ const MovieWithComments = () => {
                         <span className="font-bold text-yellow-300">{movie.imdb.rating}/10</span>
                       </div>
                     )}
-                    {movie.tomatoes?.viewer?.rating && (
+                    {movie.tomatoes?.viewer?.rating !== undefined && movie.tomatoes?.viewer?.rating !== null && (
                       <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-full backdrop-blur border border-red-500/30">
                         <span className="text-xl">🍅</span>
                         <span className="font-bold text-red-300">{movie.tomatoes.viewer.rating}/5</span>
                         <span className="text-red-200 text-xs">Audience</span>
                       </div>
                     )}
-                    {movie.tomatoes?.critic?.rating && (
+                    {movie.tomatoes?.critic?.rating !== undefined && movie.tomatoes?.viewer?.rating !== null && (
                       <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-full backdrop-blur border border-red-500/30">
                         <span className="text-xl">🍅</span>
                         <span className="font-bold text-red-300">{movie.tomatoes.critic.rating}/10</span>

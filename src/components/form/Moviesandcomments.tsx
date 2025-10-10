@@ -103,7 +103,7 @@ const MovieWithComments = () => {
 
   if (loadingMovies) {
     return (
-      <div className="flex-1 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
         <div className="text-white text-xl">Loading movies...</div>
       </div>
     );
@@ -111,14 +111,14 @@ const MovieWithComments = () => {
 
   if (movies.length === 0) {
     return (
-      <div className="flex-1 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
         <div className="text-white text-xl">No movies available</div>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 py-12 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Movie Cards */}
         {movies.map(movie => (

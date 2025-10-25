@@ -45,6 +45,7 @@ export default function Header() {
     { title: 'Home', address: '/#Home' },
     { title: 'About Me', address: '/pages/AboutMe' },
     { title: 'Portfolio', address: '/pages/Portfolio' },
+    { title: 'Historical Analyzer', address: '/pages/HistoricalAnalyzer#FastAPIDemo' },
     { title: 'Flask Demo', address: '/pages/FlaskAPI#Demo' },
     { title: 'Contact Me', address: '/pages/ContactMe' },
     { title: 'Resume', address: 'https://drive.google.com/file/d/1feYTlsiiLl-DQ0N-FWO3rUMBus1bKZC6/view?usp=sharing', external: true },
@@ -67,6 +68,7 @@ export default function Header() {
           <Menuitem title='Home' address='/#Home' />
           <Menuitem title='About Me' address='/pages/AboutMe' />
           <Menuitem title='Portfolio' address='/pages/Portfolio' />
+          <Menuitem title='Historical Analyzer' address='/pages/HistoricalAnalyzer#FastAPIDemo' />
           <Menuitem title='Flask Demo' address='/pages/FlaskAPI#Demo' />
           <Menuitem title='Contact Me' address='/pages/ContactMe' /> 
           <a href="https://drive.google.com/file/d/1feYTlsiiLl-DQ0N-FWO3rUMBus1bKZC6/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center group relative">

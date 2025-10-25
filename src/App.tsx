@@ -6,6 +6,7 @@ import Footer from './components/ui/Footer/Footer';
 import AboutMe from './pages/AboutMe';
 import Portfolio from './pages/Portfolio';
 import FlaskAPI from './pages/FlaskAPI';
+import HistoricalAnalyzer from './pages/HistoricalAnalyzer';
 import ContactMe from './pages/ContactMe';
 import Me from './assets/images/Abdullah.jpg';
 import CodePic from './assets/images/Code.png';
@@ -151,8 +152,8 @@ const LandingPage: React.FC = () => {
             I'm always open to work, feel free to "Get In Touch" with me.
           </p>
 
-          {/* buttons: group with gap; each button uses relative + hover:z to avoid covering neighbors */}
-          <div className="flex flex-wrap justify-center gap-4 isolate">
+          {/* buttons: group with gap (gap-4 was too big; it is gap-2 now); each button uses relative + hover:z to avoid covering neighbors */}
+          <div className="flex flex-wrap justify-center gap-2 isolate"> 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -397,6 +398,7 @@ export default function App() {
           <Route path="/pages/ContactMe" element={<ContactMe />}/>
           <Route path="/pages/Portfolio" element={<Portfolio />}/>
           <Route path="/pages/FlaskAPI" element={<FlaskAPI />}/>
+          <Route path="/pages/HistoricalAnalyzer" element={<HistoricalAnalyzer />}/>
         </Routes>
       </div>
       <div className='footer-container'>

@@ -152,13 +152,13 @@ const LandingPage: React.FC = () => {
             I'm always open to work, feel free to "Get In Touch" with me.
           </p>
 
-          {/* buttons: group with gap (gap-4 was too big; it is gap-2 now); each button uses relative + hover:z to avoid covering neighbors */}
-          <div className="flex flex-wrap justify-center gap-2 isolate"> 
+          {/* buttons: group buttons using relative + hover:z to avoid covering neighbors */}
+          <div className="flex flex-wrap justify-center isolate"> 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("projects")}
-              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-xs sm:text-base mx-auto"
             >
               View My Work
             </motion.button>
@@ -166,7 +166,7 @@ const LandingPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("MyExperience")}
-              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-xs sm:text-base mx-auto"
             >
               Check My Experience
             </motion.button>
@@ -174,7 +174,7 @@ const LandingPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("Skills")}
-              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 bg-primary-background text-primary-text rounded-lg font-medium text-xs sm:text-base mx-auto"
             >
               Check My Skills
             </motion.button>
@@ -182,7 +182,7 @@ const LandingPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://wa.me/81704848', '_blank')}
-              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-sm sm:text-base mx-auto"
+              className="transform-gpu will-change-transform px-6 py-3 sm:px-8 border border-primary-border text-primary-text rounded-lg font-medium text-xs sm:text-base mx-auto"
             >
               Get In Touch
             </motion.button>

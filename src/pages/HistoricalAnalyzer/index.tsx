@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { setAuthToken } from '../../api/historical_analysis/config';
+import { Space } from 'lucide-react';
 import {
     AIChatbot,
     AlliancesByDecadeChart,
@@ -14,19 +13,15 @@ import {
     WarsByRegionChart,
     WarsByYearChart as InteractiveWarsChart
 } from '../../components/analysis_forms';
+import Spacer from '../../components/ui/General/Spacer';
 
 export default function HistoricalAnalyzer() {
-
-    useEffect(() => {
-        // Set your API token here
-        setAuthToken(process.env.API_TOKEN);
-    }, []);
 
     return (
         <div className="min-h-screen bg-gray-50">
 
             {/* Introductory Message */}
-            <div className='text-center mb-8 sm:mb-12 lg:mb-16'>
+            <div className='text-center my-8 sm:mb-12 lg:my-16'>
                 <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
                     This is my <span className='text-green-700 uppercase'>historical analyzer!</span>
                 </h1>
@@ -43,6 +38,16 @@ export default function HistoricalAnalyzer() {
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Wars Analysis Tab */}
                     <div className="space-y-8">
+                        {/* Instructions */}
+                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <h3 className="font-semibold text-blue-900 mb-3">💡 How to Use:</h3>
+                            <ul className="space-y-2 text-sm text-blue-800">
+                                <li>• <strong>Wars Over Time:</strong> Use sliders to filter by year range and minimum wars threshold</li>
+                                <li>• <strong>Deadliest Wars:</strong> Select number of results, sort order, and filter by century</li>
+                                <li>• <strong>Interactive Stats:</strong> View real-time statistics as you adjust filters</li>
+                            </ul>
+                        </div>
+
                         <div>
                             <h2 className="text-3xl font-bold text-gray-900 mb-2">
                                 Wars Analysis
@@ -53,17 +58,8 @@ export default function HistoricalAnalyzer() {
                         </div>
 
                         <InteractiveWarsChart />
+                        <Spacer />
                         <InteractiveDeadliestWars />
-
-                        {/* Instructions */}
-                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                            <h3 className="font-semibold text-blue-900 mb-3">💡 How to Use:</h3>
-                            <ul className="space-y-2 text-sm text-blue-800">
-                                <li>• <strong>Wars Over Time:</strong> Use sliders to filter by year range and minimum wars threshold</li>
-                                <li>• <strong>Deadliest Wars:</strong> Select number of results, sort order, and filter by century</li>
-                                <li>• <strong>Interactive Stats:</strong> View real-time statistics as you adjust filters</li>
-                            </ul>
-                        </div>
                     </div>
 
                 {/* Country Search Tab */}
@@ -76,7 +72,7 @@ export default function HistoricalAnalyzer() {
                             Search by country code to view wars, alliances, and timeline
                         </p>
                         </div>
-
+                        <Spacer />
                         <InteractiveCountryAnalysis />
                     </div>
 

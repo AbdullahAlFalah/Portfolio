@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { getTopGDPCountries, getTopCountriesByIndex } from '../../api/historical_analysis/capabilitiesApi';
 import { TrendingUp, Loader2, AlertCircle, Calendar } from 'lucide-react';
-import { getCountryNameByCode } from '../../utils/countryUtils';
+import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
 
 // Component for interactive national capabilities analysis
 const InteractiveCapabilities = () => {

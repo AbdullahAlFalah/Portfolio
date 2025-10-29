@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { getMostActiveAlliances } from '../../api/historical_analysis/alliancesApi';
 import { Users, Loader2, AlertCircle, Filter } from 'lucide-react';
-import { getCountryNameByCode } from '../../utils/countryUtils';
+import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
 
 // Component to display most active alliances chart with customization options
 const MostActiveAlliancesChart = () => {

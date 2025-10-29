@@ -18,9 +18,9 @@ export const getMIDRecurrence = async (top = 10) => {
 };
 
 /**
- * Get dispute types distribution
- * @returns {Promise} Dispute types data
+ * Get dispute outcome distribution
+ * @returns {Promise} Dispute outcome data
  */
 export const getDisputeTypes = async () => {
-  return apiFetch('/api/v1/analysis/mid/dispute-types');
+  return apiFetch('/api/v1/analysis/mid/dispute-outcomes');
 };

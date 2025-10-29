@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { getTopGDPCountries, getTopCountriesByIndex } from '../../api/historical_analysis/capabilitiesApi';
 import { TrendingUp, Loader2, AlertCircle, Calendar } from 'lucide-react';
+import { getCountryNameByCode } from '../../utils/countryUtils';
 
 // Component for interactive national capabilities analysis
 const InteractiveCapabilities = () => {
@@ -26,7 +27,13 @@ const InteractiveCapabilities = () => {
         response = await getTopCountriesByIndex(year, topN);
       }
 
-      setData(response.data || []);
+      // Add country names to the data
+      const dataWithNames = (response.data || []).map(item => ({
+        ...item,
+        country_name: getCountryNameByCode(item.country_code)
+      }));
+
+      setData(dataWithNames);
     } catch (err) {
       setError(err.message);
     } finally {

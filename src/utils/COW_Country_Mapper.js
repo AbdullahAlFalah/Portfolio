@@ -275,3 +275,36 @@ export function getCountryCodeByName(name) {
 
   return entry ? entry[1] : null;
 }
+
+const CODE_TO_COUNTRY_MAP = {};
+Object.entries(COUNTRY_CODE_MAP).forEach(([name, code]) => {
+  // Prefered names
+  if (!CODE_TO_COUNTRY_MAP[code] || name.length < CODE_TO_COUNTRY_MAP[code].length) {
+    // Special cases for preferred names
+    if (code === 2 && name === "United States") {
+      CODE_TO_COUNTRY_MAP[code] = "US";
+    } else if (code === 200 && name === "United Kingdom") {
+      CODE_TO_COUNTRY_MAP[code] = "UK";
+    } else if (code === 365 && name === "Russia") {
+      CODE_TO_COUNTRY_MAP[code] = "Russia";
+    } else if (code === 710 && name === "China") {
+      CODE_TO_COUNTRY_MAP[code] = "China";
+    } else if (code === 640 && name === "Turkey") {
+      CODE_TO_COUNTRY_MAP[code] = "Turkiye";
+    } else if (!CODE_TO_COUNTRY_MAP[code]) {
+      CODE_TO_COUNTRY_MAP[code] = name;
+    }
+  }
+});
+
+/**
+ * Get a country name from a COW country code
+ * @param {number|string} code - The COW country code
+ * @returns {string} - The country name, or the code itself if not found
+ */
+export function getCountryNameByCode(code) {
+  if (!code) return 'Unknown';
+  
+  const numericCode = typeof code === 'string' ? parseInt(code) : code;
+  return CODE_TO_COUNTRY_MAP[numericCode] || `Code ${code}`;
+}

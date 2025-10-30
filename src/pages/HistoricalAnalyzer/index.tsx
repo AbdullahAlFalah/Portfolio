@@ -100,7 +100,7 @@ export default function HistoricalAnalyzer() {
                             <li>• <strong>CINC Index:</strong> Composite Index of National Capability - measures overall power</li>
                             <li>• <strong>GDP:</strong> Economic strength indicator</li>
                             <li>• <strong>Year Range:</strong> 1800-2020 (data availability varies)</li>
-                            <li>• <strong>Suggested Years:</strong> 1914 (WWI), 1945 (WWII), 1991 (Cold War End), 2000 (Modern Era)</li>
+                            <li>• <strong>Suggested Years:</strong> 1918 (WWI), 1945 (WWII), 1991 (Cold War End), 2010 (Modern Era)</li>
                         </ul>
                     </div>
 

@@ -82,7 +82,7 @@ const InteractiveCountryAnalysis = () => {
 
       {/* Search Section */}
       <div className="bg-white rounded-xl p-4 shadow-sm mb-6">
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row gap-2 mb-4">
           <input
             type="text"
             value={countryInput}
@@ -105,7 +105,8 @@ const InteractiveCountryAnalysis = () => {
             ) : (
               <>
                 <Search className="w-5 h-5" />
-                <span className="hidden sm:inline">Analyze</span>
+                <span className="sm:hidden">Search</span> {/* Only visible on mobile */}
+                <span className="hidden sm:inline">Analyze</span> {/* Only visible on larger screens */}
               </>
             )}
           </button>

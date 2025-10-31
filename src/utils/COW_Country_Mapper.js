@@ -276,24 +276,57 @@ export function getCountryCodeByName(name) {
   return entry ? entry[1] : null;
 }
 
+// Create reverse mapping - FULL VERSION
 const CODE_TO_COUNTRY_MAP = {};
+
 Object.entries(COUNTRY_CODE_MAP).forEach(([name, code]) => {
-  // Prefered names
-  if (!CODE_TO_COUNTRY_MAP[code] || name.length < CODE_TO_COUNTRY_MAP[code].length) {
-    // Special cases for preferred names
-    if (code === 2 && name === "United States") {
-      CODE_TO_COUNTRY_MAP[code] = "US";
-    } else if (code === 200 && name === "United Kingdom") {
-      CODE_TO_COUNTRY_MAP[code] = "UK";
-    } else if (code === 365 && name === "Russia") {
-      CODE_TO_COUNTRY_MAP[code] = "Russia";
-    } else if (code === 710 && name === "China") {
-      CODE_TO_COUNTRY_MAP[code] = "China";
-    } else if (code === 640 && name === "Turkey") {
-      CODE_TO_COUNTRY_MAP[code] = "Turkiye";
-    } else if (!CODE_TO_COUNTRY_MAP[code]) {
-      CODE_TO_COUNTRY_MAP[code] = name;
-    }
+  // Only set if not already set, or use preferred names for common countries
+  if (!CODE_TO_COUNTRY_MAP[code]) {
+    CODE_TO_COUNTRY_MAP[code] = name;
+  }
+  
+  // Override with preferred short names for common countries
+  const preferredNames = {
+    2: "US",
+    200: "UK", 
+    220: "France",
+    255: "Germany",
+    365: "Russia",
+    710: "China",
+    740: "Japan",
+    750: "India",
+    640: "Turkey",
+    651: "Egypt",
+    666: "Israel",
+    690: "Kuwait",
+    692: "Bahrain",
+    694: "Qatar",
+    696: "UAE",
+    698: "Oman",
+    730: "Korea",
+    731: "North Korea", 
+    732: "South Korea",
+    770: "Pakistan",
+    771: "Bangladesh",
+    775: "Myanmar",
+    780: "Sri Lanka",
+    790: "Nepal",
+    800: "Thailand",
+    811: "Cambodia",
+    812: "Laos",
+    816: "Vietnam",
+    820: "Malaysia",
+    830: "Singapore",
+    835: "Brunei",
+    840: "Philippines",
+    850: "Indonesia",
+    860: "Timor-Leste",
+    900: "Australia",
+    920: "New Zealand"
+  };
+  
+  if (preferredNames[code]) {
+    CODE_TO_COUNTRY_MAP[code] = preferredNames[code];
   }
 });
 
@@ -303,8 +336,12 @@ Object.entries(COUNTRY_CODE_MAP).forEach(([name, code]) => {
  * @returns {string} - The country name, or the code itself if not found
  */
 export function getCountryNameByCode(code) {
-  if (!code) return 'Unknown';
+  if (code === null || code === undefined) return 'Unknown';
   
   const numericCode = typeof code === 'string' ? parseInt(code) : code;
+  
+  // Handle NaN case
+  if (isNaN(numericCode)) return `Code ${code}`;
+  
   return CODE_TO_COUNTRY_MAP[numericCode] || `Code ${code}`;
 }

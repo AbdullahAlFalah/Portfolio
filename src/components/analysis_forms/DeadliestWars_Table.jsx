@@ -50,11 +50,7 @@ const InteractiveDeadliestWars = () => {
 
     // Sort
     if (sortBy === 'duration') {
-      filtered.sort((a, b) => {
-        const durationA = (a.end_year || new Date().getFullYear()) - a.start_year;
-        const durationB = (b.end_year || new Date().getFullYear()) - b.start_year;
-        return durationB - durationA;
-      });
+      filtered.sort((a, b) => (b.duration_years || 0) - (a.duration_years || 0)); // Use backend duration
     }
 
     return filtered;
@@ -178,7 +174,6 @@ const InteractiveDeadliestWars = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {filteredData.map((war, index) => {
-                const duration = (war.end_year || new Date().getFullYear()) - war.start_year;
                 return (
                   <tr 
                     key={index}
@@ -202,13 +197,15 @@ const InteractiveDeadliestWars = () => {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-center">
+                      {/* Use backend duration_years */}
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {duration} years
+                        {war.duration_years ? `${war.duration_years} years` : 'N/A'}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">
+                      {/* Use backend total_casualties_formatted */}
                       <div className="font-bold text-red-600">
-                        {formatNumber(war.total_casualties)}
+                        {war.total_casualties_formatted || formatNumber(war.total_casualties || 0)}
                       </div>
                     </td>
                   </tr>

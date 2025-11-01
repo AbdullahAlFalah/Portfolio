@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getWarsByRegion } from '../../api/historical_analysis/warsApi';
 import { MapPin, Loader2, AlertCircle, Sliders } from 'lucide-react';
+import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
 
 // Component to display a bar chart of wars by region with filters
 const WarsByRegionChart = () => {
@@ -19,7 +20,14 @@ const WarsByRegionChart = () => {
     try {
       setLoading(true);
       const response = await getWarsByRegion(50); // Fetch max, filter client-side
-      setData(response.data || []);
+
+      // Add country names to the data
+      const dataWithNames = (response.data || []).map(item => ({
+        ...item,
+        country_name: getCountryNameByCode(item.region) || item.region // Fallback to code if name not found
+      }));
+
+      setData(dataWithNames);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -183,7 +191,7 @@ const WarsByRegionChart = () => {
             />
             <YAxis 
               type="category"
-              dataKey="region" 
+              dataKey="country_name"
               stroke="#6b7280"
               style={{ fontSize: '11px' }}
               width={95}

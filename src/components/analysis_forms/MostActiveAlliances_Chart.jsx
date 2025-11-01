@@ -12,7 +12,7 @@ const MostActiveAlliancesChart = () => {
   
   // User inputs
   const [topN, setTopN] = useState(15);
-  const [chartType, setChartType] = useState('bar'); // 'bar' or 'horizontal'
+  const [chartType, setChartType] = useState('Vbar'); // 'Vbar' or 'Hbar'
   const [colorScheme, setColorScheme] = useState('emerald'); // 'emerald', 'blue', 'purple'
 
   const fetchData = async () => {
@@ -150,22 +150,24 @@ const MostActiveAlliancesChart = () => {
 
       {/* Chart */}
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        {chartType === 'bar' ? (
+        {chartType === 'Vbar' ? (
           <ResponsiveContainer width="100%" height={400}>
             <BarChart 
               data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis 
-                dataKey="country_code" 
+              <XAxis
+                type="category"
+                dataKey="country_name"
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
                 angle={-45}
                 textAnchor="end"
                 height={80}
               />
-              <YAxis 
+              <YAxis
+                type="number"
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
               />
@@ -201,7 +203,7 @@ const MostActiveAlliancesChart = () => {
               />
               <YAxis 
                 type="category"
-                dataKey="country_code" 
+                dataKey="country_name"
                 stroke="#6b7280"
                 style={{ fontSize: '11px' }}
                 width={35}
@@ -236,9 +238,15 @@ const MostActiveAlliancesChart = () => {
           >
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-semibold text-gray-500">#{index + 1}</span>
-              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white`}
-                    style={{ backgroundColor: getColor() }}>
-                {item.country_code}
+              <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold`}
+                    style={{ 
+                      borderLeftColor: getColor(), 
+                      backgroundColor: "white",
+                      color: getColor(), // Text color matches border
+                      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)", // Clean neutral shadow
+                    }}
+              >
+                {item.country_name}
               </span>
             </div>
             <div className="text-2xl font-bold text-gray-800">{item.alliance_count}</div>

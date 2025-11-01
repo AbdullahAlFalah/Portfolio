@@ -174,7 +174,7 @@ const InteractiveCapabilities = () => {
             <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis 
-                dataKey="country_code" 
+                dataKey="country_name" 
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
                 angle={-45}
@@ -215,6 +215,7 @@ const InteractiveCapabilities = () => {
                 <tr>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Rank</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Country Code</th>
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Country Name</th>
                   <th className="px-4 py-2 text-right text-xs font-semibold text-gray-700 uppercase">
                     {dataType === 'gdp' ? 'GDP' : 'CINC Index'}
                   </th>
@@ -232,6 +233,9 @@ const InteractiveCapabilities = () => {
                     </td>
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">
                       {item.country_code}
+                    </td>
+                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                      {item.country_name}
                     </td>
                     <td className="px-4 py-3 text-sm text-right font-bold text-emerald-700">
                       {dataType === 'gdp' 

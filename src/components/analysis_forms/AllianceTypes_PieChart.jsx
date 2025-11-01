@@ -11,12 +11,28 @@ const AllianceTypesPieChart = () => {
 
   const COLORS = ['#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5'];
 
+  // Map API alliance_type values to display names
+  const ALLIANCE_TYPE_LABELS = {
+    'defense': 'Defense Pact',
+    'nonaggression': 'Non-Aggression Pact',
+    'entente': 'Entente',
+    'neutrality': 'Neutrality Pact',
+    'undefined': 'Other'
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const response = await getAllianceTypeDistribution();
-        setData(response.data || []);
+
+        // Transform the API data to match the expected simplified format for the pie chart
+        const transformedData = (response.data || []).map(item => ({
+          type: ALLIANCE_TYPE_LABELS[item.alliance_type] || item.alliance_type,
+          count: item.count,
+        }));
+
+        setData(transformedData);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -26,6 +42,7 @@ const AllianceTypesPieChart = () => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -55,6 +72,30 @@ const AllianceTypesPieChart = () => {
 
   const total = data.reduce((sum, item) => sum + item.count, 0);
 
+  // Custom label function for the pie chart
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+    if (!percent || percent < 0.05) return null; // Don't show label for very small slices
+    
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text 
+        x={x} 
+        y={y} 
+        fill="white" 
+        textAnchor={x > cx ? 'start' : 'end'} 
+        dominantBaseline="central"
+        fontSize="12"
+        fontWeight="bold"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
   return (
     <div className="bg-gradient-to-br from-emerald-50 to-green-100 rounded-2xl shadow-lg p-6 md:p-8">
       <div className="flex items-center gap-3 mb-6">
@@ -75,13 +116,13 @@ const AllianceTypesPieChart = () => {
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={({ type, percent }) => `${type}: ${(percent * 100).toFixed(0)}%`}
+              label={renderCustomizedLabel}
               outerRadius={120}
               fill="#8884d8"
               dataKey="count"
               nameKey="type"
             >
-              {data.map((entry, index) => (
+              {data.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -102,6 +143,7 @@ const AllianceTypesPieChart = () => {
         </ResponsiveContainer>
       </div>
 
+      {/* Stats Cards */}
       <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
         {data.map((item, index) => (
           <div 

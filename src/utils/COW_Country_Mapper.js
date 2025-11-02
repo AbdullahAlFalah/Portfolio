@@ -295,7 +295,7 @@ Object.entries(COUNTRY_CODE_MAP).forEach(([name, code]) => {
     710: "China",
     740: "Japan",
     750: "India",
-    640: "Turkey",
+    640: "Turkiye",
     651: "Egypt",
     666: "Israel",
     690: "Kuwait",
@@ -344,4 +344,36 @@ export function getCountryNameByCode(code) {
   if (isNaN(numericCode)) return `Code ${code}`;
   
   return CODE_TO_COUNTRY_MAP[numericCode] || `Code ${code}`;
+}
+
+export const COW_REGION_DETAILED_MAP = {
+  1: "North America (USA and Canada)",
+  2: "South America (Continental)",
+  3: "Europe (Western and Central)",
+  4: "Sub-Saharan Africa",
+  5: "Middle East and North Africa (MENA Region)", 
+  6: "East Asia (China, Korea, Japan, Mongolia)",
+  7: "Oceania",
+  8: "Caribbean (West Indies, Bahamas, Greater Antilles)",
+  9: "Central America (Mexico to Panama)",
+  10: "South America (Southern Cone)", // Sometimes used for Southern South America
+  11: "Western Europe (EU West + UK, Scandinavia)",
+  12: "Eastern Europe (Russia, Baltics, Balkans)",
+  13: "Middle East (Arab States, Iran, Turkiye, Israel)",
+  14: "Southeast Asia"
+};
+
+/**
+ * Get detailed region name from COW region code  
+ * @param {number|string} code - The COW region code
+ * @returns {string} - The detailed region name
+ */
+export function getDetailedRegionNameByCode(code) {
+  if (code === null || code === undefined) return 'Unknown Region';
+  
+  const numericCode = typeof code === 'string' ? parseInt(code) : code;
+  
+  if (isNaN(numericCode)) return `Region ${code}`;
+  
+  return COW_REGION_DETAILED_MAP[numericCode] || `Region ${code}`;
 }

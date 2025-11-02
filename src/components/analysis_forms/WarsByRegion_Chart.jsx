@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getWarsByRegion } from '../../api/historical_analysis/warsApi';
 import { MapPin, Loader2, AlertCircle, Sliders } from 'lucide-react';
-import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
+import { getDetailedRegionNameByCode } from '../../utils/COW_Country_Mapper';
 
 // Component to display a bar chart of wars by region with filters
 const WarsByRegionChart = () => {
@@ -12,19 +12,19 @@ const WarsByRegionChart = () => {
   const [error, setError] = useState(null);
   
   // User inputs
-  const [limit, setLimit] = useState(15);
+  const [limit, setLimit] = useState(14);
   const [minWars, setMinWars] = useState(0);
   const [sortOrder, setSortOrder] = useState('desc'); // 'desc' or 'asc'
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await getWarsByRegion(50); // Fetch max, filter client-side
+      const response = await getWarsByRegion(14); // Fetch max, filter client-side
 
       // Add country names to the data
       const dataWithNames = (response.data || []).map(item => ({
         ...item,
-        country_name: getCountryNameByCode(item.region) || item.region // Fallback to code if name not found
+        region_name: getDetailedRegionNameByCode(item.region) || item.region // Fallback to code if name not found
       }));
 
       setData(dataWithNames);
@@ -111,16 +111,16 @@ const WarsByRegionChart = () => {
             </label>
             <input
               type="range"
-              min="5"
-              max="30"
-              step="5"
+              min="7"
+              max="14"
+              step="1"
               value={limit}
               onChange={(e) => setLimit(Number(e.target.value))}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>5</span>
-              <span>30</span>
+              <span>7</span>
+              <span>14</span>
             </div>
           </div>
 
@@ -191,7 +191,7 @@ const WarsByRegionChart = () => {
             />
             <YAxis 
               type="category"
-              dataKey="country_name"
+              dataKey="region_name"
               stroke="#6b7280"
               style={{ fontSize: '11px' }}
               width={95}

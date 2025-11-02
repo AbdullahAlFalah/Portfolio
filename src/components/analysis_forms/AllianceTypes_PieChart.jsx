@@ -9,7 +9,16 @@ const AllianceTypesPieChart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const COLORS = ['#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5'];
+  // Define colors for the pie chart slices
+  // const SHADES_GREEN_COLORS = ['#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5']; // Old: Emerald shades
+  const COLORS = [
+    '#93C5FD', // Light Blue
+    '#6EE7B7', // Light Green
+    '#FCD34D', // Soft Yellow
+    '#FCA5A5', // Light Red (coral)
+    '#67E8F9', // Light Teal
+    '#C4B5FD', // Light Purple
+  ]; // New: Expanded pastel color palette for more variety
 
   // Map API alliance_type values to display names
   const ALLIANCE_TYPE_LABELS = {

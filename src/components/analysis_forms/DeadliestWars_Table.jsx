@@ -31,6 +31,7 @@ const InteractiveDeadliestWars = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topN]);
 
+  // Format nicely (e.g., 7500000 → 7,500,000)
   const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US').format(num);
   };

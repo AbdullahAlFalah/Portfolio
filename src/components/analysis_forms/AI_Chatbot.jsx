@@ -34,11 +34,13 @@ const AIChatbot = () => {
   }, [messages.length]);
 
   const handleSubmit = async (questionText = input) => {
-    if (!questionText.trim() || loading) return;
+    // Use whichever text source is non-empty
+    const msgText = (questionText && questionText.trim()) || input.trim(); // prioritize passed questionText; this is the displayed text
+    if (!msgText || loading) return;
 
     const userMessage = {
       type: 'user',
-      content: input.trim(),
+      content: msgText,
       timestamp: new Date()
     };
 
@@ -46,7 +48,7 @@ const AIChatbot = () => {
     setInput('');
     setLoading(true);
 
-    // Save to history
+    // Save to history (if not duplicate)
     if (!conversationHistory.includes(questionText.trim())) {
       setConversationHistory(prev => [questionText.trim(), ...prev].slice(0, 5));
     }

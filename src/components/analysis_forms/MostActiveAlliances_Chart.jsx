@@ -238,12 +238,14 @@ const MostActiveAlliancesChart = () => {
           >
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-semibold text-gray-500">#{index + 1}</span>
-              <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold`}
+              {/* Country Name Container with colored border */}
+              <span className={`rounded-lg text-xs font-bold px-2 py-0.5`}
                     style={{ 
                       borderLeftColor: getColor(), 
                       backgroundColor: "white",
                       color: getColor(), // Text color matches border
-                      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)", // Clean neutral shadow
+                      boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)",
+                      whiteSpace: "nowrap"
                     }}
               >
                 {item.country_name}

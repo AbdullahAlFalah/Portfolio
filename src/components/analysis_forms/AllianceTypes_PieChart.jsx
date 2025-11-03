@@ -84,6 +84,14 @@ const AllianceTypesPieChart = () => {
 
   const total = data.reduce((sum, item) => sum + item.count, 0);
 
+  const legendPayload = data.map((item, index) => ({
+    id: item.type,
+    value: item.type,
+    // Included color so legend circle matches the corresponding "Cell" fill
+    color: COLORS[index % COLORS.length],
+    payload: item,
+  }));
+
   // Custom label function for the pie chart
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
     if (!percent || percent < 0.05) return null; // Don't show label for very small slices
@@ -150,6 +158,7 @@ const AllianceTypesPieChart = () => {
               verticalAlign="bottom" 
               height={36}
               iconType="circle"
+              payload={legendPayload}
             />
           </PieChart>
         </ResponsiveContainer>

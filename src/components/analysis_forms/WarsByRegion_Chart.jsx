@@ -164,7 +164,7 @@ const WarsByRegionChart = () => {
         <div className="mt-4 flex justify-end">
           <button
             onClick={() => {
-              setLimit(15);
+              setLimit(14);
               setMinWars(0);
               setSortOrder('desc');
             }}
@@ -181,7 +181,7 @@ const WarsByRegionChart = () => {
           <BarChart 
             data={filteredData} 
             layout="vertical"
-            margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
+            margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis 
@@ -194,7 +194,7 @@ const WarsByRegionChart = () => {
               dataKey="region_name"
               stroke="#6b7280"
               style={{ fontSize: '11px' }}
-              width={95}
+              width={175}
             />
             <Tooltip 
               contentStyle={{ 

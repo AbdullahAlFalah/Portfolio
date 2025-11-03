@@ -97,7 +97,7 @@ const AIChatbot = () => {
       icon: '⚔️',
       questions: [
         'What were the 5 deadliest wars?',
-        'Show me wars by region',
+        'Which region had the most wars?',
         'What is the average war duration?',
         'Which wars lasted the longest?'
       ]
@@ -107,17 +107,17 @@ const AIChatbot = () => {
       icon: '🤝',
       questions: [
         'Which countries have the most alliances?',
-        'Show alliance types distribution',
-        'How did alliances change by decade?',
+        'What alliance types were most popular?',
+        'How did alliances change through the decades?',
       ]
     },
     {
       category: 'Global Trends',
       icon: '🌍',
       questions: [
-        'Compare wars vs alliances over time',
-        'Show global power distribution',
-        'What are the global peace statistics?',
+        'How have wars and alliances changed in relation to each other over time?',
+        'Which countries hold the most global power?',
+        'What do the metrics say about the state of global peace?',
       ]
     }
   ];

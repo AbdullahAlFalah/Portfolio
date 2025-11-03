@@ -228,8 +228,8 @@ const WarsByRegionChart = () => {
         </div>
         <div className="bg-white rounded-lg p-3 shadow-sm border-l-4 border-purple-500">
           <div className="text-xs text-gray-500 uppercase">Top Region</div>
-          <div className="text-lg font-bold text-purple-600">
-            {filteredData.length > 0 ? filteredData[0].region : '-'}
+          <div className="text-xs font-bold text-purple-600">
+            {filteredData.length > 0 ? filteredData[0].region_name : '-'}
           </div>
         </div>
         <div className="bg-white rounded-lg p-3 shadow-sm border-l-4 border-amber-500">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { getCountrySummary, getCountryTimeline } from '../../api/historical_analysis/countryApi';
 import { getCountryCodeByName, COUNTRY_CODE_MAP } from '../../utils/COW_Country_Mapper';
 import { Search, Loader2, AlertCircle, Globe, Calendar, Shield, Swords } from 'lucide-react';
+import { formatMilper } from '../../utils/Number_Utils';
 
 // Component for interactive country analysis with summary and timeline views
 const InteractiveCountryAnalysis = () => {
@@ -178,7 +179,8 @@ const InteractiveCountryAnalysis = () => {
                   {data.wars?.length ? (
                     data.wars.map((war, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
-                        <div className="font-medium text-gray-900">War #{war.warnum}</div>
+                        <div className="font-medium text-gray-900">War #{war.war_num}</div>
+                        <div className="font-medium text-gray-900">Conflict's Name: {war.war_name}</div>
                         <div className="text-sm text-gray-600">
                           {war.start_year} - {war.end_year || 'Ongoing'}
                         </div>
@@ -205,6 +207,7 @@ const InteractiveCountryAnalysis = () => {
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center justify-between">
                           <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>
+                          <div className="font-medium text-gray-900">Alliance Members: {a.memebers}</div>
                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
                             {a.alliance_type}
                           </span>
@@ -237,13 +240,13 @@ const InteractiveCountryAnalysis = () => {
                     <div className="p-3 bg-emerald-50 rounded-lg">
                       <div className="text-xs text-gray-600">CINC Index</div>
                       <div className="text-lg font-bold text-emerald-700">
-                        {data.latest_capabilities[0].cinc?.toFixed(4) || 'N/A'}
+                        {data.latest_capabilities[0].cinc?.toFixed(6) || 'N/A'}
                       </div>
                     </div>
                     <div className="p-3 bg-purple-50 rounded-lg">
                       <div className="text-xs text-gray-600">Military Personnel</div>
                       <div className="text-lg font-bold text-purple-700">
-                        {data.latest_capabilities[0].milper?.toLocaleString() || 'N/A'}
+                        {formatMilper(data.latest_capabilities[0].milper)}
                       </div>
                     </div>
                   </div>

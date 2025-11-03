@@ -360,7 +360,12 @@ export const COW_REGION_DETAILED_MAP = {
   11: "Western Europe (EU West + UK, Scandinavia)",
   12: "Eastern Europe (Russia, Baltics, Balkans)",
   13: "Middle East (Arab States, Iran, Turkiye, Israel)",
-  14: "Southeast Asia"
+  14: "Southeast Asia",
+  15: "South Asia (India, Pakistan, Afghanistan, etc.)",
+  16: "Western Africa (Detailed Sub-Saharan Region)", // Sub-division of region 4
+  17: "Eastern Africa (Detailed Sub-Saharan Region)", // Sub-division of region 4
+  18: "Island Territories (Minor Atlantic/Indian Ocean Islands)", // Generic for unlisted territories
+  19: "Small/Dispersed Islands (Pacific/Caribbean Islands)", // Generic for unlisted territories as well
 };
 
 /**

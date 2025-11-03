@@ -36,10 +36,13 @@ const AllianceTypesPieChart = () => {
         const response = await getAllianceTypeDistribution();
 
         // Transform the API data to match the expected simplified format for the pie chart
-        const transformedData = (response.data || []).map(item => ({
+        let transformedData = (response.data || []).map(item => ({
           type: ALLIANCE_TYPE_LABELS[item.alliance_type] || item.alliance_type,
           count: item.count,
         }));
+
+        // Changed: Sort the data by 'count' in descending order (largest to smallest)
+        transformedData = transformedData.sort((a, b) => b.count - a.count);
 
         setData(transformedData);
         setError(null);

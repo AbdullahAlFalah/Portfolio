@@ -85,9 +85,19 @@ const AllianceTypesPieChart = () => {
 
   // Define the sorter function
   const customItemSorter = (a, b) => {
-      const indexA = sortedIndexMap.get(a.value) || 0; // a.value is the alliance type
-      const indexB = sortedIndexMap.get(b.value) || 0;
-      return indexA - indexB;
+    // 1. Extract the values to be compared
+    const valA = a?.value;
+    const valB = b?.value;
+
+    // 2. Define a default index for missing values
+    const defaultIndex = dataSorted.length;
+
+    // 3. Get the indices from the sortedIndexMap, or use defaultIndex if not found
+    const indexA = sortedIndexMap.get(valA) ?? defaultIndex;
+    const indexB = sortedIndexMap.get(valB) ?? defaultIndex;
+
+    // 4. Descending order
+    return indexA - indexB;
   };
 
   // Calculate total for percentage calculations

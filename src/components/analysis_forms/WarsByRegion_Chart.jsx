@@ -183,7 +183,7 @@ const WarsByRegionChart = () => {
               <BarChart 
                 data={filteredData} 
                 layout="vertical"
-                margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
+                margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis 
@@ -196,7 +196,7 @@ const WarsByRegionChart = () => {
                   dataKey="region_name"
                   stroke="#6b7280"
                   style={{ fontSize: '12px' }}
-                  width={180}
+                  width={160}
                 />
                 <Tooltip 
                   contentStyle={{ 

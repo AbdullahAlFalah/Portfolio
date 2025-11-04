@@ -79,18 +79,19 @@ const AllianceTypesPieChart = () => {
     );
   }
 
-  const total = data.reduce((sum, item) => sum + item.count, 0);
+  // sort descending so pie, legend and cards stay in the same order
+  const dataSorted = [...data].sort((a, b) => b.count - a.count);
+  const sortedIndexMap = new Map(dataSorted.map((item, index) => [item.type, index]));
 
-  // Create ordered legend items matching data order
-  const orderedTypes = data.map(item => item.type);
-
-  // Legend formatter to maintain order
-  const legendFormatter = (value, entry, index) => {
-    // Find correct index based on our ordered data
-    const orderIndex = orderedTypes.indexOf(value);
-    // Use data-order attribute to force ordering
-    return <span data-order={orderIndex}>{value}</span>;
+  // Define the sorter function
+  const customItemSorter = (a, b) => {
+      const indexA = sortedIndexMap.get(a.value) || 0; // a.value is the alliance type
+      const indexB = sortedIndexMap.get(b.value) || 0;
+      return indexA - indexB;
   };
+
+  // Calculate total for percentage calculations
+  const total = dataSorted.reduce((sum, item) => sum + item.count, 0);
 
   // Custom label function for the pie chart
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -129,12 +130,12 @@ const AllianceTypesPieChart = () => {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={400} minWidth={300}>
+        <ResponsiveContainer width="100%" height={360} minWidth={280}>
           <PieChart>
             <Pie
-              data={data}
+              data={dataSorted}
               cx="50%"
-              cy="45%"
+              cy="40%"
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius="90%"
@@ -142,7 +143,7 @@ const AllianceTypesPieChart = () => {
               dataKey="count"
               nameKey="type"
             >
-              {data.map((_, index) => (
+              {dataSorted.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -158,7 +159,7 @@ const AllianceTypesPieChart = () => {
               verticalAlign="bottom" 
               height={36}
               iconType="circle"
-              formatter={legendFormatter}
+              itemSorter={customItemSorter}
             />
           </PieChart>
         </ResponsiveContainer>

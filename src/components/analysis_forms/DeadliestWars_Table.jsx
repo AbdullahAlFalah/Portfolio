@@ -192,7 +192,7 @@ const InteractiveDeadliestWars = () => {
                     <td className="px-4 py-3">
                       <div className="font-medium text-gray-900">{war.war_name}</div>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 whitespace-nowrap">
                       <div className="text-sm text-gray-600">
                         {/* START DATE: YYYY/MM/DD */}
                         {war.start_year ? (
@@ -219,7 +219,7 @@ const InteractiveDeadliestWars = () => {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-center">
+                    <td className="px-4 py-3 text-center whitespace-nowrap">
                       {/* Use backend durations */}
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         {war.duration_years !== undefined && war.duration_months !== undefined && war.duration_days !== undefined ? (

@@ -171,8 +171,9 @@ const InteractiveCountryAnalysis = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <Swords className="w-5 h-5 text-red-500" />
                   <h3 className="font-semibold text-gray-800">Wars Involvement</h3>
-                  <span className="ml-auto inline-flex items-center justify-center bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
-                    {data.wars?.length || 0} wars
+                  {/* War Pill */}
+                  <span className="ml-auto flex items-center justify-center bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold w-[90px]">
+                    {data.wars?.length || 0} Wars
                   </span>
                 </div>
                 <div className="space-y-2 max-h-60 overflow-y-auto">
@@ -197,8 +198,9 @@ const InteractiveCountryAnalysis = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <Shield className="w-5 h-5 text-emerald-500" />
                   <h3 className="font-semibold text-gray-800">Alliance Participation</h3>
-                  <span className="ml-auto inline-flex items-center justify-center bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">
-                    {data.alliances?.length || 0} alliances
+                  {/* Alliance Pill */}
+                  <span className="ml-auto flex items-center justify-center bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold w-[90px]">
+                    {data.alliances?.length || 0} Alliances
                   </span>
                 </div>
                 <div className="space-y-2 max-h-60 overflow-y-auto">
@@ -206,8 +208,9 @@ const InteractiveCountryAnalysis = () => {
                     data.alliances.map((a, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center justify-between">
-                          <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>                         
-                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                          <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>
+                          {/* Alliance Type Pill */}                       
+                          <span className="flex items-center justify-center text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
                             {a.alliance_type}
                           </span>
                         </div>

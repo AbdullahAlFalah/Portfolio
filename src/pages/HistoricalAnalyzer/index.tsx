@@ -20,7 +20,7 @@ export default function HistoricalAnalyzer() {
 
             {/* Introductory Message */}
             <div className="container px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-                <div className='text-center my-8 sm:mb-12 lg:my-16'>
+                <div className='text-center'>
                     <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
                         This is my <span className='text-green-700 capitalize'>historical analyzer!</span>
                     </h1>

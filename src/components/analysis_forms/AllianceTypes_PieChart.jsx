@@ -41,9 +41,6 @@ const AllianceTypesPieChart = () => {
           count: item.count,
         }));
 
-        // Changed: Sort the data by 'count' in descending order (largest to smallest)
-        transformedData = transformedData.sort((a, b) => b.count - a.count);
-
         setData(transformedData);
         setError(null);
       } catch (err) {
@@ -84,13 +81,16 @@ const AllianceTypesPieChart = () => {
 
   const total = data.reduce((sum, item) => sum + item.count, 0);
 
-  const legendPayload = data.map((item, index) => ({
-    id: item.type,
-    value: item.type,
-    // Included color so legend circle matches the corresponding "Cell" fill
-    color: COLORS[index % COLORS.length],
-    payload: item,
-  }));
+  // Create ordered legend items matching data order
+  const orderedTypes = data.map(item => item.type);
+
+  // Legend formatter to maintain order
+  const legendFormatter = (value, entry, index) => {
+    // Find correct index based on our ordered data
+    const orderIndex = orderedTypes.indexOf(value);
+    // Use data-order attribute to force ordering
+    return <span data-order={orderIndex}>{value}</span>;
+  };
 
   // Custom label function for the pie chart
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -129,15 +129,15 @@ const AllianceTypesPieChart = () => {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={350}>
+        <ResponsiveContainer width="100%" height={400} minWidth={300}>
           <PieChart>
             <Pie
               data={data}
               cx="50%"
-              cy="50%"
+              cy="45%"
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={120}
+              outerRadius="90%"
               fill="#8884d8"
               dataKey="count"
               nameKey="type"
@@ -158,7 +158,7 @@ const AllianceTypesPieChart = () => {
               verticalAlign="bottom" 
               height={36}
               iconType="circle"
-              payload={legendPayload}
+              formatter={legendFormatter}
             />
           </PieChart>
         </ResponsiveContainer>

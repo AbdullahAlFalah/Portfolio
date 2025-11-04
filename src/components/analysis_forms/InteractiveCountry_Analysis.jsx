@@ -171,7 +171,7 @@ const InteractiveCountryAnalysis = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <Swords className="w-5 h-5 text-red-500" />
                   <h3 className="font-semibold text-gray-800">Wars Involvement</h3>
-                  <span className="ml-auto bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
+                  <span className="ml-auto inline-flex items-center justify-center bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
                     {data.wars?.length || 0} wars
                   </span>
                 </div>
@@ -197,7 +197,7 @@ const InteractiveCountryAnalysis = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <Shield className="w-5 h-5 text-emerald-500" />
                   <h3 className="font-semibold text-gray-800">Alliance Participation</h3>
-                  <span className="ml-auto bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">
+                  <span className="ml-auto inline-flex items-center justify-center bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">
                     {data.alliances?.length || 0} alliances
                   </span>
                 </div>
@@ -206,14 +206,26 @@ const InteractiveCountryAnalysis = () => {
                     data.alliances.map((a, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center justify-between">
-                          <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>
-                          <div className="font-medium text-gray-900">Alliance Members: {a.memebers}</div>
+                          <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>                         
                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
                             {a.alliance_type}
                           </span>
                         </div>
+                        {/* Alliance Members */}
+                        {a.members && (
+                          <div className="text-sm font-medium text-gray-900">
+                            Alliance Members: {a.members || 'N/A'}
+                          </div>
+                        )}
+                        {/* Duration */}
                         <div className="text-sm text-gray-600">
-                          {a.year_start} - {a.year_end || 'Present'}
+                          {/* Only show the full duration if a start year exists */}
+                          {a.start_year ? (
+                            `${a.start_year} - ${a.end_year || 'Present'}`
+                          ) : (
+                            // If the start date is missing, show only the end date or 'Present'
+                            a.end_year || 'Present'
+                          )}
                         </div>
                       </div>
                     ))
@@ -258,32 +270,40 @@ const InteractiveCountryAnalysis = () => {
           {/* Timeline View */}
           {view === 'timeline' && (
             <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="space-y-3 max-h-[500px] overflow-y-auto">
-                {timeline.length > 0 ? (
-                  timeline.map((event, i) => (
-                    <div key={i} className="flex gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                      <div className="flex-shrink-0 mt-1">{getEventIcon(event.type)}</div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-gray-900">{event.year}</span>
-                          <span
-                            className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                              event.type === 'war'
-                                ? 'bg-red-100 text-red-700'
-                                : event.type === 'alliance'
-                                ? 'bg-emerald-100 text-emerald-700'
-                                : event.type === 'mid'
-                                ? 'bg-amber-100 text-amber-700'
-                                : 'bg-blue-100 text-blue-700'
-                            }`}
-                          >
-                            {event.type.toUpperCase()}
-                          </span>
+              <div className="space-y-3 max-h-[500px] overflow-y-auto">               
+                {Array.isArray(timeline) && timeline.length > 0 ? (
+                  timeline.map((event, i) => {
+                    // safe normalisation
+                    const type = String(event?.type || 'unknown').toLowerCase();
+                    const label = type.toUpperCase();
+                    const title = event?.title || event?.description || '—';
+                    const year = event?.year || '—';
+                    const pillClass =
+                      type === 'war'
+                        ? 'bg-red-100 text-red-700'
+                        : type === 'alliance'
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : type === 'mid'
+                        ? 'bg-amber-100 text-amber-700'
+                        : 'bg-blue-100 text-blue-700';
+
+                    return (
+                      <div key={i} className="flex gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <div className="flex-shrink-0 mt-1">{getEventIcon(type)}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-gray-900">{year}</span>
+                            <span
+                              className={`text-xs px-2 py-0.5 rounded-full font-medium ${pillClass}`}
+                            >
+                              {label}
+                            </span>
+                          </div>
+                          <div className="text-sm text-gray-700">{title}</div>
                         </div>
-                        <div className="text-sm text-gray-700">{event.title}</div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
                   <p className="text-center text-gray-500 py-8">No timeline events available</p>
                 )}

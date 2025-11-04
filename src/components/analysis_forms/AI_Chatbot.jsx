@@ -17,6 +17,7 @@ const AIChatbot = () => {
   const [showQuickActions, setShowQuickActions] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const hasMountedRef = useRef(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,6 +25,11 @@ const AIChatbot = () => {
 
   useEffect(() => {
     scrollToBottom();
+    // skip auto-scroll on initial mount to avoid page jumping
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
   }, [messages]);
 
   // Auto-hide quick actions after first message on mobile

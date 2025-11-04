@@ -170,43 +170,48 @@ const InteractiveCapabilities = () => {
             </h3>
           </div>
 
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis 
-                dataKey="country_name" 
-                stroke="#6b7280"
-                style={{ fontSize: '12px' }}
-                angle={-45}
-                textAnchor="end"
-                height={80}
-              />
-              <YAxis 
-                stroke="#6b7280"
-                style={{ fontSize: '12px' }}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#fff',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-                }}
-                formatter={(value) => 
-                  dataType === 'gdp' 
-                    ? `$${value.toLocaleString()}` 
-                    : value.toFixed(4)
-                }
-              />
-              <Legend />
-              <Bar 
-                dataKey={dataType === 'gdp' ? 'gdp' : 'composite_index'} 
-                fill="#059669"
-                radius={[4, 4, 0, 0]}
-                name={dataType === 'gdp' ? 'GDP' : 'CINC Index'}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+          {/* Add scrollable wrapper */}
+          <div className="overflow-x-auto">
+            <div className="min-w-[800px]">
+              <ResponsiveContainer width="100%" height={400}>
+                <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis 
+                    dataKey="country_name" 
+                    stroke="#6b7280"
+                    style={{ fontSize: '12px' }}
+                    angle={-45}
+                    textAnchor="end"
+                    height={80}
+                  />
+                  <YAxis 
+                    stroke="#6b7280"
+                    style={{ fontSize: '12px' }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#fff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                    }}
+                    formatter={(value) => 
+                      dataType === 'gdp' 
+                        ? `$${value.toLocaleString()}` 
+                        : value.toFixed(4)
+                    }
+                  />
+                  <Legend />
+                  <Bar 
+                    dataKey={dataType === 'gdp' ? 'gdp' : 'composite_index'} 
+                    fill="#059669"
+                    radius={[4, 4, 0, 0]}
+                    name={dataType === 'gdp' ? 'GDP' : 'CINC Index'}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
 
           {/* Data Table */}
           <div className="mt-6 overflow-x-auto">

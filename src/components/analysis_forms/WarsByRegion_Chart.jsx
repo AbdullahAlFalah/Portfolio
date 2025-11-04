@@ -177,41 +177,45 @@ const WarsByRegionChart = () => {
 
       {/* Chart */}
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={450}>
-          <BarChart 
-            data={filteredData} 
-            layout="vertical"
-            margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis 
-              type="number"
-              stroke="#6b7280"
-              style={{ fontSize: '12px' }}
-            />
-            <YAxis 
-              type="category"
-              dataKey="region_name"
-              stroke="#6b7280"
-              style={{ fontSize: '11px' }}
-              width={175}
-            />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#fff',
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-              }}
-            />
-            <Bar 
-              dataKey="total_wars" 
-              fill="#059669"
-              radius={[0, 4, 4, 0]}
-              name="Total Wars"
-            />
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="overflow-x-auto"> {/* Add scrollable wrapper */}
+          <div className="min-w-[800px]"> {/* Force minimum width */}
+            <ResponsiveContainer width="100%" height={500} minWidth={400}>
+              <BarChart 
+                data={filteredData} 
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis 
+                  type="number"
+                  stroke="#6b7280"
+                  style={{ fontSize: '12px' }}
+                />
+                <YAxis 
+                  type="category"
+                  dataKey="region_name"
+                  stroke="#6b7280"
+                  style={{ fontSize: '12px' }}
+                  width={180}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                />
+                <Bar 
+                  dataKey="total_wars" 
+                  fill="#059669"
+                  radius={[0, 4, 4, 0]}
+                  name="Total Wars"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       {/* Statistics */}

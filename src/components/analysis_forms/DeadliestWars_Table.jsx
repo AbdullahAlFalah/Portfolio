@@ -194,13 +194,61 @@ const InteractiveDeadliestWars = () => {
                     </td>
                     <td className="px-4 py-3">
                       <div className="text-sm text-gray-600">
-                        {war.start_year} - {war.end_year || 'Ongoing'}
+                        {/* START DATE: YYYY/MM/DD */}
+                        {war.start_year ? (
+                          <>
+                            {war.start_year}/
+                            {String(war.start_month).padStart(2, '0')}/
+                            {String(war.start_day).padStart(2, '0')}
+                          </>
+                        ) : (
+                          'Unknown'
+                        )}
+                        
+                        {' - '} 
+
+                        {/* END DATE: YYYY/MM/DD or 'Ongoing' */}
+                        {war.end_year ? (
+                          <>
+                            {war.end_year}/
+                            {String(war.end_month).padStart(2, '0')}/
+                            {String(war.end_day).padStart(2, '0')}
+                          </>
+                        ) : (
+                          'Ongoing'
+                        )}
                       </div>
                     </td>
                     <td className="px-4 py-3 text-center">
-                      {/* Use backend duration_years */}
+                      {/* Use backend durations */}
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {war.duration_years ? `${war.duration_years} years` : 'N/A'}
+                        {war.duration_years !== undefined && war.duration_months !== undefined && war.duration_days !== undefined ? (
+                          <>
+                            {/* --- Duration years logic --- */}
+                            {war.duration_years > 0 && (
+                                `${war.duration_years} year${war.duration_years === 1 ? '' : 's'}`
+                            )}
+
+                            {/* Comma after years, only if months or days are also present */}
+                            {war.duration_years > 0 && (war.duration_months > 0 || war.duration_days > 0) && ', '}
+
+                            {/* --- Duration months logic --- */}
+                            {war.duration_months > 0 && (
+                                `${war.duration_months} month${war.duration_months === 1 ? '' : 's'}`
+                            )}
+
+                            {/* Comma after months, only if there were days present */}
+                            {(war.duration_months > 0 && war.duration_days > 0) && ', '}
+
+                            {/* --- Duration Days Logic --- */}
+                            {war.duration_days > 0 && (
+                                `${war.duration_days} day${war.duration_days === 1 ? '' : 's'}`
+                            )}
+                          </>
+                        ) : (
+                          // Fallback for wars that might still be missing duration data
+                          'N/A'
+                        )}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right">

@@ -19,17 +19,19 @@ export default function HistoricalAnalyzer() {
         <div className="min-h-screen bg-gray-50">
 
             {/* Introductory Message */}
-            <div className='text-center my-8 sm:mb-12 lg:my-16'>
-                <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
-                    This is my <span className='text-green-700 capitalize'>historical analyzer!</span>
-                </h1>
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 max-w-3xl mx-auto mb-8">
-                    An All in One Historical Data Analysis Tool
-                </p>
-                <p className='text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed'>
-                    Explore wars, alliances, national capabilities, and leverage AI for insights.<br />
-                    Dive deep into historical data with interactive visualizations and an AI assistant.
-                </p>
+            <div className="container px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+                <div className='text-center my-8 sm:mb-12 lg:my-16'>
+                    <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4'>
+                        This is my <span className='text-green-700 capitalize'>historical analyzer!</span>
+                    </h1>
+                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 max-w-3xl mx-auto mb-8">
+                        An All in One Historical Data Analysis Tool
+                    </p>
+                    <p className='text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed'>
+                        Explore wars, alliances, national capabilities, and leverage AI for insights.<br />
+                        Dive deep into historical data with interactive visualizations and an AI assistant.
+                    </p>
+                </div>
             </div>
 
             {/* Main Content */}

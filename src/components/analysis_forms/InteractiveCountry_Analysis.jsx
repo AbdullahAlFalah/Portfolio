@@ -28,7 +28,8 @@ const InteractiveCountryAnalysis = () => {
       ]);
 
       setData(summaryRes.data[0]);
-      setTimeline(timelineRes.data || []);
+      const timelineData = timelineRes.data?.[0]?.events || []; // Safely access events
+      setTimeline(timelineData);
     } catch (err) {
       setError(err.message || 'Failed to fetch country data.');
     } finally {
@@ -172,7 +173,7 @@ const InteractiveCountryAnalysis = () => {
                   <Swords className="w-5 h-5 text-red-500" />
                   <h3 className="font-semibold text-gray-800">Wars Involvement</h3>
                   {/* War Pill */}
-                  <span className="ml-auto flex items-center justify-center bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold w-[90px]">
+                  <span className="ml-auto flex items-center justify-center bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold w-auto">
                     {data.wars?.length || 0} Wars
                   </span>
                 </div>
@@ -180,7 +181,7 @@ const InteractiveCountryAnalysis = () => {
                   {data.wars?.length ? (
                     data.wars.map((war, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
-                        <div className="font-medium text-gray-900">War #{war.war_num}</div>
+                        <div className="font-bold text-lg text-red-700">War #{war.war_num}</div>
                         <div className="font-medium text-gray-900">Conflict's Name: {war.war_name}</div>
                         <div className="text-sm text-gray-600">
                           {war.start_year} - {war.end_year || 'Ongoing'}
@@ -199,7 +200,7 @@ const InteractiveCountryAnalysis = () => {
                   <Shield className="w-5 h-5 text-emerald-500" />
                   <h3 className="font-semibold text-gray-800">Alliance Participation</h3>
                   {/* Alliance Pill */}
-                  <span className="ml-auto flex items-center justify-center bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold w-[90px]">
+                  <span className="ml-auto flex items-center justify-center bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold w-auto">
                     {data.alliances?.length || 0} Alliances
                   </span>
                 </div>
@@ -208,7 +209,7 @@ const InteractiveCountryAnalysis = () => {
                     data.alliances.map((a, i) => (
                       <div key={i} className="p-3 bg-gray-50 rounded-lg">
                         <div className="flex items-center justify-between">
-                          <div className="font-medium text-gray-900">Alliance #{a.alliance_id}</div>
+                          <div className="font-bold text-lg text-emerald-700">Alliance #{a.alliance_id}</div>
                           {/* Alliance Type Pill */}                       
                           <span className="flex items-center justify-center text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
                             {a.alliance_type}
@@ -277,7 +278,7 @@ const InteractiveCountryAnalysis = () => {
                 {Array.isArray(timeline) && timeline.length > 0 ? (
                   timeline.map((event, i) => {
                     // safe normalisation
-                    const type = String(event?.type || 'unknown').toLowerCase();
+                    const type = String(event?.event_type || 'unknown').toLowerCase();
                     const label = type.toUpperCase();
                     const title = event?.title || event?.description || '—';
                     const year = event?.year || '—';

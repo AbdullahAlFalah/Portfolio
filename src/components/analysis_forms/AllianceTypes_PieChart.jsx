@@ -139,13 +139,13 @@ const AllianceTypesPieChart = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={360} minWidth={280}>
+      <div className="bg-white rounded-xl py-4 shadow-sm">
+        <ResponsiveContainer  width="100%" height={400} minWidth={200}>
           <PieChart>
             <Pie
               data={dataSorted}
               cx="50%"
-              cy="40%"
+              cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius="90%"

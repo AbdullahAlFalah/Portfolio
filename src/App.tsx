@@ -48,9 +48,16 @@ const LandingPage: React.FC = () => {
       {
         title: "Flask API",
         description: "A RESTful API built with Flask, demonstrating my backend development skills. It includes user authentication, CRUD operations, and data validation.",
-        technologyStack: ["Python", "Flask", "REST", "MongoDB"],
+        technologyStack: ["Python", "Flask", "REST", "MongoDB", "Render"],
         githubURL: "https://github.com/AbdullahAlFalah/my-flask-backend",
-        demoURL: "/pages/FlaskAPI_Demo",
+        demoURL: "/pages/FlaskAPI",
+      },
+      {
+        title: "Historical Data Analyzer",
+        description: "An interactive web application that analyzes historical data using various visualization techniques. Built with React and FastAPI.",
+        technologyStack: ["React", "JavaScript", "Python", "FastAPI", "REST", "PostgreSQL", "Render"],
+        githubURL: "",
+        demoURL: "/pages/HistoricalAnalyzer",
       }
     ]
 
@@ -58,6 +65,7 @@ const LandingPage: React.FC = () => {
       "Sudoku Game": "https://ik.imagekit.io/kh7xo3apt/WebImages/Sudoku.jpg?updatedAt=1758637798824",
       "MishMash App": "https://ik.imagekit.io/kh7xo3apt/WebImages/MishMash.jpg?updatedAt=1758637789305",
       "Flask API": "https://ik.imagekit.io/kh7xo3apt/WebImages/FlaskCode.png?updatedAt=1759490998846",
+      "Historical Data Analyzer": "https://ik.imagekit.io/kh7xo3apt/WebImages/AI_Analyzer.png?updatedAt=1762357645325",
     };
 
     // Section visibility tracking
@@ -263,14 +271,16 @@ const LandingPage: React.FC = () => {
                         ))}
                       </div>
                       <div className="flex gap-3">
-                        <a
-                          href={project.githubURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 text-center px-4 py-2 bg-primary-background text-primary-text rounded-lg hover:bg-primary-background/90 transition-colors"
-                        >
-                          Code
-                        </a>
+                        {project.githubURL !== "" && (
+                          <a
+                            href={project.githubURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 text-center px-4 py-2 bg-primary-background text-primary-text rounded-lg hover:bg-primary-background/90 transition-colors"
+                          >
+                            Code
+                          </a>
+                        )}
                         <a
                           href={project.demoURL}
                           target="_blank"

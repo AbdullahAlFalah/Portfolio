@@ -168,7 +168,7 @@ const InteractiveDeadliestWars = () => {
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold">Rank</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold">War Name</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold">Period</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold">Period</th>
                 <th className="px-4 py-3 text-center text-sm font-semibold">Duration</th>
                 <th className="px-4 py-3 text-right text-sm font-semibold">Casualties</th>
               </tr>

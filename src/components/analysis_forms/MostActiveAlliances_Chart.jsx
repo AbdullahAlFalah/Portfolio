@@ -125,8 +125,8 @@ const MostActiveAlliancesChart = () => {
               onChange={(e) => setChartType(e.target.value)}
               className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none bg-white"
             >
-              <option value="bar">Vertical Bars</option>
-              <option value="horizontal">Horizontal Bars</option>
+              <option value="Vbar">Vertical Bars</option>
+              <option value="Hbar">Horizontal Bars</option>
             </select>
           </div>
 
@@ -205,8 +205,8 @@ const MostActiveAlliancesChart = () => {
                 type="category"
                 dataKey="country_name"
                 stroke="#6b7280"
-                style={{ fontSize: '11px' }}
-                width={35}
+                style={{ fontSize: '12px' }}
+                width={50}
               />
               <Tooltip 
                 contentStyle={{ 

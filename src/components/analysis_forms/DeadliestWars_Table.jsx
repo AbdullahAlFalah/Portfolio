@@ -166,11 +166,11 @@ const InteractiveDeadliestWars = () => {
           <table className="w-full">
             <thead className="bg-emerald-600 text-white">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold">Rank</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold">War Name</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold">Rank</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold">War Name</th>
                 <th className="px-4 py-3 text-center text-sm font-semibold">Period</th>
                 <th className="px-4 py-3 text-center text-sm font-semibold">Duration</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold">Casualties</th>
+                <th className="px-4 py-3 text-center text-sm font-semibold">Casualties</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -180,7 +180,7 @@ const InteractiveDeadliestWars = () => {
                     key={index}
                     className="hover:bg-emerald-50 transition-colors duration-150"
                   >
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 text-center">
                       <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm ${
                         index < 3 
                           ? 'bg-emerald-600 text-white' 
@@ -189,10 +189,10 @@ const InteractiveDeadliestWars = () => {
                         {index + 1}
                       </span>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-3 text-center">
                       <div className="font-medium text-gray-900">{war.war_name}</div>
                     </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
+                    <td className="px-4 py-3 text-center whitespace-nowrap">
                       <div className="text-sm text-gray-600">
                         {/* START DATE: YYYY/MM/DD */}
                         {war.start_year ? (
@@ -222,36 +222,20 @@ const InteractiveDeadliestWars = () => {
                     <td className="px-4 py-3 text-center whitespace-nowrap">
                       {/* Use backend durations */}
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {war.duration_years !== undefined && war.duration_months !== undefined && war.duration_days !== undefined ? (
-                          <>
-                            {/* --- Duration years logic --- */}
-                            {war.duration_years > 0 && (
-                                `${war.duration_years} year${war.duration_years === 1 ? '' : 's'}`
-                            )}
-
-                            {/* Comma after years, only if months or days are also present */}
-                            {war.duration_years > 0 && (war.duration_months > 0 || war.duration_days > 0) && ', '}
-
-                            {/* --- Duration months logic --- */}
-                            {war.duration_months > 0 && (
-                                `${war.duration_months} month${war.duration_months === 1 ? '' : 's'}`
-                            )}
-
-                            {/* Comma after months, only if there were days present */}
-                            {(war.duration_months > 0 && war.duration_days > 0) && ', '}
-
-                            {/* --- Duration Days Logic --- */}
-                            {war.duration_days > 0 && (
-                                `${war.duration_days} day${war.duration_days === 1 ? '' : 's'}`
-                            )}
-                          </>
-                        ) : (
-                          // Fallback for wars that might still be missing duration data
-                          'N/A'
-                        )}
+                        {(() => {
+                          const y = Number(war.duration_years) || 0;
+                          const m = Number(war.duration_months) || 0;
+                          const d = Number(war.duration_days) || 0;
+                          const parts = [];
+                          if (y > 0) parts.push(`${y} year${y === 1 ? '' : 's'}`);
+                          if (m > 0) parts.push(`${m} month${m === 1 ? '' : 's'}`);
+                          if (d > 0) parts.push(`${d} day${d === 1 ? '' : 's'}`);
+                          // Fallback added for wars that might still be missing duration data  
+                          return parts.length ? parts.join(', ') : 'N/A';                                               
+                        })()}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-4 py-3 text-center">
                       {/* Use backend total_casualties_formatted */}
                       <div className="font-bold text-red-600">
                         {war.total_casualties_formatted || formatNumber(war.total_casualties || 0)}

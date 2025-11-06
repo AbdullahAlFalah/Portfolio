@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface DownloadButtonProps {
   url: string
@@ -6,7 +7,6 @@ interface DownloadButtonProps {
 }
 
 const DownloadButton: React.FC<DownloadButtonProps> = ({ url, label }) => {
-  const [hover, setHover] = React.useState(false)
 
   const baseStyle: React.CSSProperties = {
     display: 'inline-block',
@@ -17,26 +17,18 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ url, label }) => {
     fontWeight: 600,
     textDecoration: 'none',
     fontSize: '1.1rem',
-    transition: 'box-shadow 180ms ease, transform 180ms ease',
-    boxShadow: 'none',
   }
 
-  const hoverStyle: React.CSSProperties = hover
-    ? { boxShadow: '0 10px 30px rgba(74, 144, 226, 0.18)' }
-    : {}
-
   return (
-    <a 
+    <motion.a 
       href={url} 
       download
-      style={{ ...baseStyle, ...hoverStyle }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onFocus={() => setHover(true)}
-      onBlur={() => setHover(false)}
+      style={baseStyle}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {label}
-    </a>
+    </motion.a>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { getTopGDPCountries, getTopCountriesByIndex } from '../../api/historical_analysis/capabilitiesApi';
+import { getTopStatsCountries, getTopCountriesByIndex } from '../../api/historical_analysis/capabilitiesApi';
 import { TrendingUp, Loader2, AlertCircle, Calendar } from 'lucide-react';
 import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
 
@@ -13,7 +13,25 @@ const InteractiveCapabilities = () => {
   // User inputs
   const [year, setYear] = useState(2000);
   const [topN, setTopN] = useState(10);
-  const [dataType, setDataType] = useState('cinc'); // 'cinc' or 'gdp'
+  const [dataType, setDataType] = useState('cinc'); // 'cinc' or 'population' or 'pec' or 'irst'
+
+  // Map data type to label
+  const metricLabel = (type) => {
+    switch (type) {
+      case 'population': return 'Population';
+      case 'pec': return 'Primary Energy Consumption';
+      case 'irst': return 'Iron & Steel Production';
+      case 'cinc': return 'CINC Index';
+      default: return 'Metric';
+    }
+  };
+
+  // Format values for display
+  const formatValue = (value, type) => {
+    if (value == null) return 'N/A';
+    if (type === 'population') return (value * 1000).toLocaleString(); // convert thousands → real pop
+    return value.toLocaleString();
+  };
 
   const fetchData = async () => {
     try {
@@ -21,8 +39,8 @@ const InteractiveCapabilities = () => {
       setError(null);
 
       let response;
-      if (dataType === 'gdp') {
-        response = await getTopGDPCountries(year, topN);
+      if (dataType !== 'cinc') {
+        response = await getTopStatsCountries(year, topN);
       } else {
         response = await getTopCountriesByIndex(year, topN);
       }
@@ -121,7 +139,9 @@ const InteractiveCapabilities = () => {
               className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none bg-white"
             >
               <option value="cinc">Composite Index (CINC)</option>
-              <option value="gdp">Gross Domestic Product</option>
+              <option value="population">Population (Total)</option>
+              <option value="pec">Primary Energy Consumption</option>
+              <option value="irst">Iron & Steel Production</option>
             </select>
           </div>
         </div>
@@ -166,7 +186,7 @@ const InteractiveCapabilities = () => {
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="mb-4">
             <h3 className="font-semibold text-gray-800">
-              Top {topN} Countries by {dataType === 'gdp' ? 'GDP' : 'Composite Index'} in {year}
+              Top {topN} Countries by {metricLabel(dataType)} in {year}
             </h3>
           </div>
 
@@ -195,18 +215,22 @@ const InteractiveCapabilities = () => {
                       borderRadius: '8px',
                       boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                     }}
-                    formatter={(value) => 
-                      dataType === 'gdp' 
-                        ? `$${value.toLocaleString()}` 
-                        : value.toFixed(4)
-                    }
+                    formatter={(value) => formatValue(value, dataType)}
                   />
                   <Legend />
                   <Bar 
-                    dataKey={dataType === 'gdp' ? 'gdp' : 'composite_index'} 
+                    dataKey={
+                      dataType === 'cinc' 
+                        ? 'composite_index'
+                        : dataType === 'population'
+                          ? 'population'
+                          : dataType === 'pec'
+                            ? 'primary_energy_consumption'
+                            : 'iron_steel_production'
+                    } 
                     fill="#059669"
                     radius={[4, 4, 0, 0]}
-                    name={dataType === 'gdp' ? 'GDP' : 'CINC Index'}
+                    name={metricLabel(dataType)}
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -222,7 +246,7 @@ const InteractiveCapabilities = () => {
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Country Code</th>
                   <th className="px-4 py-2 text-left text-xs font-semibold text-gray-700 uppercase">Country Name</th>
                   <th className="px-4 py-2 text-right text-xs font-semibold text-gray-700 uppercase">
-                    {dataType === 'gdp' ? 'GDP' : 'CINC Index'}
+                    {metricLabel(dataType)}
                   </th>
                 </tr>
               </thead>
@@ -243,9 +267,16 @@ const InteractiveCapabilities = () => {
                       {item.country_name}
                     </td>
                     <td className="px-4 py-3 text-sm text-right font-bold text-emerald-700">
-                      {dataType === 'gdp' 
-                        ? `$${item.gdp?.toLocaleString() || 'N/A'}`
-                        : item.composite_index?.toFixed(4) || 'N/A'
+                      {dataType === 'cinc' 
+                        ? (item.composite_index?.toFixed(4) ?? 'N/A')
+                        : formatValue(
+                            dataType === 'population' 
+                              ? item.population
+                              : dataType === 'pec'
+                                ? item.primary_energy_consumption
+                                : item.iron_steel_production,
+                            dataType
+                          )
                       }
                     </td>
                   </tr>
@@ -271,19 +302,19 @@ const InteractiveCapabilities = () => {
               onClick={() => { setYear(1950); setDataType('cinc'); }}
               className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
             >
-              Try: 1950 (Post-WWII)
+              Try: 1950 ({metricLabel(dataType)})
             </button>
             <button
-              onClick={() => { setYear(2000); setDataType('gdp'); }}
+              onClick={() => { setYear(2000); setDataType('population'); }}
               className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
             >
-              Try: 2000 (GDP)
+              Try: 2000 ({metricLabel(dataType)})
             </button>
             <button
-              onClick={() => { setYear(1990); setDataType('cinc'); }}
+              onClick={() => { setYear(1990); setDataType('pec'); }}
               className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
             >
-              Try: 1990 (Cold War End)
+              Try: 1990 ({metricLabel(dataType)})
             </button>
           </div>
         </div>

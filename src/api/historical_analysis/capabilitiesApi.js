@@ -1,13 +1,13 @@
 import { apiFetch } from './config';
 
 /**
- * Get top GDP countries for a specific year
+ * Get top stats countries for a specific year
  * @param {number} year - Year to query
  * @param {number} limit - Number of countries to return
- * @returns {Promise} Top GDP countries data
+ * @returns {Promise} Top stats countries data
  */
-export const getTopGDPCountries = async (year, limit = 20) => {
-  return apiFetch(`/api/v1/analysis/capabilities/top-gdp?year=${year}&limit=${limit}`);
+export const getTopStatsCountries = async (year, limit = 20) => {
+  return apiFetch(`/api/v1/analysis/capabilities/top-stats?year=${year}&limit=${limit}`);
 };
 
 /**

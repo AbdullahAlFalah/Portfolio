@@ -5,10 +5,6 @@
 
 // Configuration
 export { 
-  getAuthToken, 
-  setAuthToken, 
-  removeAuthToken,
-  getAuthHeaders,
   apiFetch 
 } from './config';
 
@@ -54,7 +50,7 @@ export {
 
 // Capabilities API
 export {
-  getTopGDPCountries,
+  getTopStatsCountries,
   getMilitaryForceAverage,
   getCapabilitiesGrowthRate,
   getTopCountriesByIndex

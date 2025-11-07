@@ -11,6 +11,7 @@ import ContactMe from './pages/ContactMe';
 import Me from './assets/images/Abdullah.jpg';
 import CodePic from './assets/images/Code.png';
 import Bubbles from './assets/sounds/bubble.mp3';
+import { distributeProjects } from './utils/Number_Utils';
 import './App.css';
 
 const LandingPage: React.FC = () => {
@@ -30,7 +31,15 @@ const LandingPage: React.FC = () => {
         }
     ];
 
-    const projects = [
+    interface projectItem {
+      title: string;
+      description: string;
+      technologyStack: string[];
+      githubURL: string;
+      demoURL: string;
+    }
+
+    const projects: projectItem[] = [
       {
         title: "Sudoku Game",
         description: "This is a Sudoku game I built using vanilla React Native. It features 3 difficulty levels and a clean simple non-responsive UI.",
@@ -54,12 +63,14 @@ const LandingPage: React.FC = () => {
       },
       {
         title: "Historical Data Analyzer",
-        description: "An interactive web application that analyzes historical data using various visualization techniques. Built with React and FastAPI. This backend repository is private, if you're interested, please contact me.",
+        description: "An interactive web application that analyzes historical data using various visualization techniques. Built with React and FastAPI. Remember the backend might be sleeping and it takes a minute to awake it. This backend repository is private, if you're interested, please contact me.",
         technologyStack: ["React", "JavaScript", "Python", "FastAPI", "REST", "PostgreSQL", "Render"],
         githubURL: "",
         demoURL: "/pages/HistoricalAnalyzer",
       }
     ]
+
+    const projectColumns = distributeProjects(projects) as projectItem[][];
 
     const projectImages: Record<string, string> = {
       "Sudoku Game": "https://ik.imagekit.io/kh7xo3apt/WebImages/Sudoku.jpg?updatedAt=1758637798824",
@@ -226,7 +237,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 mb-12 sm:mb-16 bg-white rounded-lg shadow">
+        <section id="projects" className="py-10 mb-12 sm:mb-16 bg-white rounded-lg shadow">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -238,64 +249,81 @@ const LandingPage: React.FC = () => {
               <p className="text-center mb-12 max-w-2xl mx-auto">
                 Here are some of my recent projects that showcase my skills and passion for development
               </p>
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-8 mx-auto max-w-5xl items-start">
-                {/* Project Card */}
-                {projects.map((project, index) => (
-                  <motion.div
-                    key={project.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+              <div className="
+                flex justify-center
+                flex-wrap sm:flex-nowrap 
+                gap-6 md:gap-8 
+                mx-auto max-w-5xl items-start
+              ">
+                {/* Column Container: Stacks cards vertically with full height on mobile/small and 1/3 width on large */}
+                {projectColumns.map((column, columnIndex) => (
+                  <div 
+                    key={columnIndex}
                     className="
-                      border rounded-lg overflow-hidden hover:shadow-lg transition-shadow
-                      mb-4 sm:mb-6
-                      break-inside-avoid-column
+                      flex flex-col 
+                      w-full sm:w-1/2 lg:w-1/3 
+                      gap-6 md:gap-8
                     "
                   >
-                    <div className="w-full bg-muted flex justify-center items-center">
-                      <img 
-                        src={projectImages[project.title]} 
-                        alt={`Screenshot of ${project.title} project`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground mb-4">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <h4 className='text-base font-semibold w-full'>Tech Stack:</h4>
-                        {project.technologyStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-primary-background/10 text-sm rounded-full text-green-700 font-semibold"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex gap-3">
-                        {project.githubURL !== "" && (
-                          <a
-                            href={project.githubURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 text-center px-4 py-2 bg-primary-background text-primary-text rounded-lg hover:bg-primary-background/90 transition-colors"
-                          >
-                            Code
-                          </a>
-                        )}
-                        <a
-                          href={project.demoURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 text-center px-4 py-2 border border-primary-border text-primary-text rounded-lg hover:bg-primary-background/10 transition-colors"
-                        >
-                          Demo
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
+                    {/* Project Card */}
+                    {column.map((project, index) => (
+                      <motion.div
+                        key={project.title}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        className="
+                          border rounded-lg overflow-hidden hover:shadow-lg transition-shadow
+                          mb-4 sm:mb-6
+                          break-inside-avoid-column
+                        "
+                      >
+                        <div className="w-full bg-muted flex justify-center items-center">
+                          <img 
+                            src={projectImages[project.title]} 
+                            alt={`Screenshot of ${project.title} project`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                          <p className="text-muted-foreground mb-4">{project.description}</p>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            <h4 className='text-base font-semibold w-full'>Tech Stack:</h4>
+                            {project.technologyStack.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 bg-primary-background/10 text-sm rounded-full text-green-700 font-semibold"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="flex gap-3">
+                            {project.githubURL !== "" && (
+                              <a
+                                href={project.githubURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 text-center px-4 py-2 bg-primary-background text-primary-text rounded-lg hover:bg-primary-background/90 transition-colors"
+                              >
+                                Code
+                              </a>
+                            )}
+                            <a
+                              href={project.demoURL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 text-center px-4 py-2 border border-primary-border text-primary-text rounded-lg hover:bg-primary-background/10 transition-colors"
+                            >
+                              Demo
+                            </a>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 ))}
               </div>
             </motion.div>

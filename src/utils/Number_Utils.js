@@ -19,4 +19,17 @@ const formatMilper = (m) => {
     return n.toLocaleString();
 };
 
-export { formatMilper };
+const distributeProjects = (projects) => {
+    // Using the number of columns based on the largest Tailwind column class (lg:columns-3)
+    const NUM_COLUMNS = 3; 
+    const columns = Array.from({ length: NUM_COLUMNS }, () => []);
+
+    projects.forEach((project, index) => {
+        // Distribute projects sequentially: 0 -> Col 1, 1 -> Col 2, 2 -> Col 3, 3 -> Col 1, etc.
+        columns[index % NUM_COLUMNS].push(project);
+    });
+
+    return columns;
+};
+
+export { formatMilper, distributeProjects };

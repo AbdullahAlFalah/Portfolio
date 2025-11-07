@@ -54,7 +54,7 @@ const LandingPage: React.FC = () => {
       },
       {
         title: "Historical Data Analyzer",
-        description: "An interactive web application that analyzes historical data using various visualization techniques. Built with React and FastAPI.",
+        description: "An interactive web application that analyzes historical data using various visualization techniques. Built with React and FastAPI. This backend repository is private, if you're interested, please contact me.",
         technologyStack: ["React", "JavaScript", "Python", "FastAPI", "REST", "PostgreSQL", "Render"],
         githubURL: "",
         demoURL: "/pages/HistoricalAnalyzer",
@@ -238,7 +238,7 @@ const LandingPage: React.FC = () => {
               <p className="text-center mb-12 max-w-2xl mx-auto">
                 Here are some of my recent projects that showcase my skills and passion for development
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mx-auto max-w-5xl items-start">
+              <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-8 mx-auto max-w-5xl items-start">
                 {/* Project Card */}
                 {projects.map((project, index) => (
                   <motion.div
@@ -247,7 +247,11 @@ const LandingPage: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                    className="
+                      border rounded-lg overflow-hidden hover:shadow-lg transition-shadow
+                      mb-4 sm:mb-6
+                      break-inside-avoid-column
+                    "
                   >
                     <div className="w-full bg-muted flex justify-center items-center">
                       <img 

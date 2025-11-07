@@ -6,8 +6,8 @@ import { apiFetch } from './config';
  * @param {number} limit - Number of countries to return
  * @returns {Promise} Top stats countries data
  */
-export const getTopStatsCountries = async (year, limit = 20) => {
-  return apiFetch(`/api/v1/analysis/capabilities/top-stats?year=${year}&limit=${limit}`);
+export const getTopStatsCountries = async (year, sort_by, limit = 20) => {
+  return apiFetch(`/api/v1/analysis/capabilities/top-stats?year=${year}&sort_by=${sort_by}&limit=${limit}`);
 };
 
 /**

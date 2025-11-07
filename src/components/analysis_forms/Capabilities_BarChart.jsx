@@ -14,6 +14,7 @@ const InteractiveCapabilities = () => {
   const [year, setYear] = useState(2000);
   const [topN, setTopN] = useState(10);
   const [dataType, setDataType] = useState('cinc'); // 'cinc' or 'population' or 'pec' or 'irst'
+  const [sortBy, setSortBy] = useState('population'); // 'population' or 'energy' or 'steel'
 
   // Map data type to label
   const metricLabel = (type) => {
@@ -25,6 +26,16 @@ const InteractiveCapabilities = () => {
       default: return 'Metric';
     }
   };
+
+  // Map data type to API's sort_by value
+  const mapDataTypeToSortBy = (dataType) => {
+    switch (dataType) {
+      case 'population': return 'population';
+      case 'pec': return 'energy'; // Maps to API's 'energy' enum value
+      case 'irst': return 'steel';  // Maps to API's 'steel' enum value
+      default: return 'population';
+    }
+  }
 
   // Format values for display
   const formatValue = (value, type) => {
@@ -40,7 +51,7 @@ const InteractiveCapabilities = () => {
 
       let response;
       if (dataType !== 'cinc') {
-        response = await getTopStatsCountries(year, topN);
+        response = await getTopStatsCountries(year, sortBy, topN);
       } else {
         response = await getTopCountriesByIndex(year, topN);
       }
@@ -70,6 +81,15 @@ const InteractiveCapabilities = () => {
       handleAnalyze();
     }
   };
+
+  const handleDataTypeChange = (e) => {
+    const newDataType = e.target.value;
+    setDataType(newDataType);
+    
+    // Automatically set the sorting key to match the display metric
+    const newSortBy = mapDataTypeToSortBy(newDataType);
+    setSortBy(newSortBy);
+  }
 
   return (
     <div className="bg-gradient-to-br from-emerald-50 to-green-100 rounded-2xl shadow-lg p-6 md:p-8">
@@ -135,7 +155,7 @@ const InteractiveCapabilities = () => {
             </label>
             <select
               value={dataType}
-              onChange={(e) => setDataType(e.target.value)}
+              onChange={handleDataTypeChange}
               className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none bg-white"
             >
               <option value="cinc">Composite Index (CINC)</option>

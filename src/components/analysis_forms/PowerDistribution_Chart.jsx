@@ -70,45 +70,49 @@ const PowerDistributionChart = () => {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={350}>
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis 
-              dataKey="year" 
-              stroke="#6b7280"
-              style={{ fontSize: '12px' }}
-              interval="preserveStartEnd"
-            />
-            <YAxis 
-              stroke="#6b7280"
-              style={{ fontSize: '12px' }}
-              domain={[0, 100]}
-              label={{ value: 'Share (%)', angle: -90, position: 'insideLeft', style: { fontSize: '12px' } }}
-            />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#fff',
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-              }}
-              formatter={(value) => `${value.toFixed(2)}%`}
-            />
-            <Legend 
-              wrapperStyle={{ paddingTop: '20px' }}
-              iconType="circle"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="top_10_share" 
-              stroke="#059669" 
-              strokeWidth={3}
-              dot={{ fill: '#059669', r: 3 }}
-              activeDot={{ r: 5 }}
-              name="Top 10 Share"
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <div className='overflow-x-auto'>
+          <div style={{ minWidth: `${data.length * 50}px` }}>
+            <ResponsiveContainer width="100%" height={350}>
+              <LineChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis 
+                  dataKey="year" 
+                  stroke="#6b7280"
+                  style={{ fontSize: '12px' }}
+                  interval="preserveStartEnd"
+                />
+                <YAxis 
+                  stroke="#6b7280"
+                  style={{ fontSize: '12px', fontWeight: '500' }}
+                  domain={[0, 100]}
+                  label={{ value: 'Share (%)', angle: -90, position: 'insideLeft', style: { fontSize: '12px' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  formatter={(value) => `${value.toFixed(2)}%`}
+                />
+                <Legend 
+                  wrapperStyle={{ paddingTop: '20px' }}
+                  iconType="circle"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="top_10_share" 
+                  stroke="#059669" 
+                  strokeWidth={3}
+                  dot={{ fill: '#059669', r: 3 }}
+                  activeDot={{ r: 5 }}
+                  name="Top 10 Share"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-4">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { getMostActiveAlliances } from '../../api/historical_analysis/alliancesApi';
 import { Users, Loader2, AlertCircle, Filter } from 'lucide-react';
 import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
@@ -149,9 +149,10 @@ const MostActiveAlliancesChart = () => {
       </div>
 
       {/* Chart */}
-      <div className="bg-white rounded-xl p-4 shadow-sm">
+      <div className="bg-white rounded-xl p-4 shadow-sm overflow-x-auto">
         {chartType === 'Vbar' ? (
-          <ResponsiveContainer width="100%" height={400}>
+
+          <div style={{ width: `${data.length * 50}px`, height: '400px' }}>
             <BarChart 
               data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
@@ -164,7 +165,7 @@ const MostActiveAlliancesChart = () => {
                 style={{ fontSize: '12px' }}
                 angle={-45}
                 textAnchor="end"
-                height={80}
+                height={90}
               />
               <YAxis
                 type="number"
@@ -183,13 +184,14 @@ const MostActiveAlliancesChart = () => {
               <Bar 
                 dataKey="alliance_count" 
                 fill={getColor()}
+                barSize={35}
                 radius={[4, 4, 0, 0]}
                 name="Alliance Count"
               />
             </BarChart>
-          </ResponsiveContainer>
+          </div>
         ) : (
-          <ResponsiveContainer width="100%" height={450}>
+          <div style={{ width: '100%', height: `${data.length * 35}px` }}>
             <BarChart 
               data={data}
               layout="vertical"
@@ -206,7 +208,7 @@ const MostActiveAlliancesChart = () => {
                 dataKey="country_name"
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
-                width={50}
+                width={70}
               />
               <Tooltip 
                 contentStyle={{ 
@@ -220,11 +222,12 @@ const MostActiveAlliancesChart = () => {
               <Bar 
                 dataKey="alliance_count" 
                 fill={getColor()}
+                barSize={30}
                 radius={[0, 4, 4, 0]}
                 name="Alliance Count"
               />
             </BarChart>
-          </ResponsiveContainer>
+          </div>
         )}
       </div>
 

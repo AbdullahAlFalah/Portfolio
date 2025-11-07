@@ -332,9 +332,13 @@ const AlliancesByDecadeChart = () => {
 
       {/* Chart */}
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={350}>
-          {renderChart()}
-        </ResponsiveContainer>
+        <div className="overflow-x-auto">
+          <div style={{ minWidth: `${filteredData.length * 60}px` }}>
+            <ResponsiveContainer width="100%" height={350}>
+              {renderChart()}
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       {/* Statistics Cards */}

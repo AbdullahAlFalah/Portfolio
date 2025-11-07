@@ -374,9 +374,13 @@ const GlobalTrendsChart = () => {
 
       {/* Chart */}
       <div className="bg-white rounded-xl p-4 shadow-sm">
-        <ResponsiveContainer width="100%" height={400}>
-          {renderChart()}
-        </ResponsiveContainer>
+        <div className="overflow-x-auto">
+          <div style={{ minWidth: `${data.length * 50}px` }}>
+            <ResponsiveContainer width="100%" height={400}>
+              {renderChart()}
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       {/* Statistics Grid */}

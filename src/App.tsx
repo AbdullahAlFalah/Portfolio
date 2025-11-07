@@ -237,7 +237,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-5 mb-12 sm:mb-16 bg-white rounded-lg shadow">
+        <section id="projects" className="mb-12 sm:mb-16 bg-white rounded-lg shadow">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -275,7 +275,7 @@ const LandingPage: React.FC = () => {
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         className="
                           border rounded-lg overflow-hidden hover:shadow-lg transition-shadow
-                          break-inside-avoid-column
+                          break-inside-avoid
                         "
                       >
                         <div className="w-full bg-muted flex justify-center items-center">

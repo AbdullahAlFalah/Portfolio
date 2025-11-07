@@ -151,8 +151,13 @@ const MostActiveAlliancesChart = () => {
       {/* Chart */}
       <div className="bg-white rounded-xl p-4 shadow-sm overflow-x-auto">
         {chartType === 'Vbar' ? (
-
-          <div style={{ width: `${data.length * 50}px`, height: '400px' }}>
+          <div 
+            style={{  
+              width: data.length > 0 ? `${data.length * 50 + 80}px` : '100%', 
+              minWidth: '400px',
+              height: '100%'
+            }}
+          >
             <BarChart 
               data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
@@ -191,7 +196,13 @@ const MostActiveAlliancesChart = () => {
             </BarChart>
           </div>
         ) : (
-          <div style={{ width: '100%', height: `${data.length * 35}px` }}>
+          <div 
+            style={{ 
+              height: data.length > 0 ? `${data.length * 35}px` : '100%',
+              minHeight: '400px',
+              width: '100%'
+            }}
+          >
             <BarChart 
               data={data}
               layout="vertical"
@@ -208,7 +219,7 @@ const MostActiveAlliancesChart = () => {
                 dataKey="country_name"
                 stroke="#6b7280"
                 style={{ fontSize: '12px' }}
-                width={70}
+                width={100}
               />
               <Tooltip 
                 contentStyle={{ 

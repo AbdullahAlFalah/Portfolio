@@ -83,9 +83,8 @@ const PowerDistributionChart = () => {
                 />
                 <YAxis 
                   stroke="#6b7280"
-                  style={{ fontSize: '12px', fontWeight: '500' }}
                   domain={[0, 100]}
-                  label={{ value: 'Share (%)', angle: -90, position: 'insideLeft', style: { fontSize: '12px' } }}
+                  label={{ value: 'Share (%)', angle: -90, position: 'insideLeft', style: { fontSize: '12px', fontWeight: 600 } }}
                 />
                 <Tooltip 
                   contentStyle={{ 

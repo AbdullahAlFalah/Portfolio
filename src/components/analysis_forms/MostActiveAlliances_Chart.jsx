@@ -153,13 +153,16 @@ const MostActiveAlliancesChart = () => {
         {chartType === 'Vbar' ? (
           <div 
             style={{  
-              width: data.length > 0 ? `${data.length * 50 + 80}px` : '100%', 
+              width: data.length > 0 ? `${data.length * 50}px` : '400px', 
               minWidth: '400px',
               height: '100%'
             }}
           >
             <BarChart 
               data={data}
+              layout='horizontal'
+              width={data.length > 0 ? data.length * 50 : '400px'}
+              height={600}
               margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -198,14 +201,16 @@ const MostActiveAlliancesChart = () => {
         ) : (
           <div 
             style={{ 
-              height: data.length > 0 ? `${data.length * 35}px` : '100%',
+              height: data.length > 0 ? `${data.length * 35}px` : '400px',
               minHeight: '400px',
               width: '100%'
             }}
           >
             <BarChart 
               data={data}
-              layout="vertical"
+              layout="vertical"             
+              height={data.length > 0 ? data.length * 35 : 400}
+              width={600}
               margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />

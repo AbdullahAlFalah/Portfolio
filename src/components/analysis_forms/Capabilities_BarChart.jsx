@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { getTopStatsCountries, getTopCountriesByIndex } from '../../api/historical_analysis/capabilitiesApi';
-import { TrendingUp, Loader2, AlertCircle, Calendar } from 'lucide-react';
+import { TrendingUp, Loader2, AlertCircle, Calendar, RotateCcw } from 'lucide-react';
 import { getCountryNameByCode } from '../../utils/COW_Country_Mapper';
 
 // Component for interactive national capabilities analysis
@@ -23,14 +23,14 @@ const InteractiveCapabilities = () => {
       case 'pec': return 'Primary Energy Consumption';
       case 'irst': return 'Iron & Steel Production';
       case 'cinc': return 'CINC Index';
-      default: return 'Metric';
+      default: return 'CINC Index';
     }
   };
 
   // Map data type to API's sort_by value
   const mapDataTypeToSortBy = (dataType) => {
     switch (dataType) {
-      case 'population': return 'population';
+      case 'population': return 'population'; // Maps to API's 'population' enum value
       case 'pec': return 'energy'; // Maps to API's 'energy' enum value
       case 'irst': return 'steel';  // Maps to API's 'steel' enum value
       default: return 'population';
@@ -70,17 +70,13 @@ const InteractiveCapabilities = () => {
     }
   };
 
-  const handleAnalyze = () => {
+  // Rework: Fetch data on component mount and whenever dependencies change
+  useEffect(() => {
     if (year >= 1800 && year <= 2020) {
       fetchData();
     }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleAnalyze();
-    }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [year, topN, dataType, sortBy]);
 
   const handleDataTypeChange = (e) => {
     const newDataType = e.target.value;
@@ -89,6 +85,38 @@ const InteractiveCapabilities = () => {
     // Automatically set the sorting key to match the display metric
     const newSortBy = mapDataTypeToSortBy(newDataType);
     setSortBy(newSortBy);
+  }
+
+  const handleReset = () => {
+    setYear(2000);
+    setTopN(10);
+    setDataType('cinc');
+    setSortBy('population');
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-br from-emerald-50 to-green-100 rounded-2xl shadow-lg p-8 flex items-center justify-center min-h-[400px]">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-10 h-10 text-emerald-600 animate-spin" />
+          <p className="text-emerald-700 font-medium">Loading capabilities data...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gradient-to-br from-red-50 to-rose-100 rounded-2xl shadow-lg p-8">
+        <div className="flex items-center gap-3 text-red-700">
+          <AlertCircle className="w-6 h-6" />
+          <div>
+            <h3 className="font-semibold text-lg">Error Loading Data</h3>
+            <p className="text-sm mt-1">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -123,7 +151,6 @@ const InteractiveCapabilities = () => {
               max="2020"
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}
-              onKeyPress={handleKeyPress}
               className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-emerald-500 focus:outline-none"
               placeholder="e.g., 2000"
             />
@@ -166,40 +193,17 @@ const InteractiveCapabilities = () => {
           </div>
         </div>
 
-        {/* Analyze Button */}
+        {/* Reset Button */}
         <div className="mt-4 flex justify-end">
           <button
-            onClick={handleAnalyze}
-            disabled={loading || year < 1800 || year > 2020}
+            onClick={handleReset}
             className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
-            {loading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              <>
-                <TrendingUp className="w-5 h-5" />
-                Analyze
-              </>
-            )}
+            <RotateCcw className="w-5 h-5" />
+            Reset Filters
           </button>
         </div>
       </div>
-
-      {/* Error State */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
-          <div className="flex items-center gap-3 text-red-700">
-            <AlertCircle className="w-5 h-5" />
-            <div>
-              <h3 className="font-semibold">Error</h3>
-              <p className="text-sm mt-1">{error}</p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Chart */}
       {data.length > 0 && (
@@ -303,39 +307,6 @@ const InteractiveCapabilities = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-      )}
-
-      {/* Empty State */}
-      {!data.length && !loading && !error && (
-        <div className="bg-white rounded-xl p-8 text-center">
-          <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="w-8 h-8 text-emerald-600" />
-          </div>
-          <h3 className="font-semibold text-gray-900 mb-2">Ready to Analyze</h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Select a year and metric, then click "Analyze" to view national capabilities
-          </p>
-          <div className="flex flex-wrap justify-center gap-2 text-xs">
-            <button
-              onClick={() => { setYear(1950); setDataType('cinc'); }}
-              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
-            >
-              Try: 1950 ({metricLabel(dataType)})
-            </button>
-            <button
-              onClick={() => { setYear(2000); setDataType('population'); }}
-              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
-            >
-              Try: 2000 ({metricLabel(dataType)})
-            </button>
-            <button
-              onClick={() => { setYear(1990); setDataType('pec'); }}
-              className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
-            >
-              Try: 1990 ({metricLabel(dataType)})
-            </button>
           </div>
         </div>
       )}

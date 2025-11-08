@@ -226,7 +226,7 @@ const InteractiveCapabilities = () => {
                     style={{ fontSize: '12px' }}
                     angle={-45}
                     textAnchor="end"
-                    height={80}
+                    height={90}
                   />
                   <YAxis 
                     stroke="#6b7280"

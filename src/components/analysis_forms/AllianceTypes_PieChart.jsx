@@ -145,7 +145,7 @@ const AllianceTypesPieChart = () => {
             <Pie
               data={dataSorted}
               cx="50%"
-              cy="55%"
+              cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius="90%"

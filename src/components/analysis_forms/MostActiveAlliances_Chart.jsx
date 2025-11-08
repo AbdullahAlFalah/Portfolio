@@ -210,7 +210,7 @@ const MostActiveAlliancesChart = () => {
               data={data}
               layout="vertical"             
               height={data.length > 0 ? data.length * 35 : 400}
-              width={600}
+              width={900}
               margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />

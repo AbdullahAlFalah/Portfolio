@@ -155,7 +155,7 @@ const MovieWithComments = () => {
                       bg-gradient-to-r from-white to-green-200
                       bg-clip-text text-transparent
                       inline-block
-                      translate-y-[0.05em]
+                      translate-y-0.5
                     ">
                       {movie.title}
                     </span>

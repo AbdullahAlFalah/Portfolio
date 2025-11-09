@@ -150,8 +150,15 @@ const MovieWithComments = () => {
                 )}
                 
                 <div className="flex-1 text-white">
-                  <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-green-200 bg-clip-text text-transparent">
-                    {movie.title}
+                  <h1 className="text-5xl font-bold relative mb-4">
+                    <span className="
+                      bg-gradient-to-r from-white to-green-200
+                      bg-clip-text text-transparent
+                      inline-block
+                      translate-y-[0.05em]
+                    ">
+                      {movie.title}
+                    </span>
                   </h1>
                   
                   <div className="flex flex-wrap gap-4 mb-6">

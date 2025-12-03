@@ -48,7 +48,7 @@ export default function Header() {
     { title: 'Historical Analyzer', address: '/pages/HistoricalAnalyzer#FastAPIDemo' },
     { title: 'Flask Demo', address: '/pages/FlaskAPI#Demo' },
     { title: 'Contact Me', address: '/pages/ContactMe' },
-    { title: 'Resume', address: 'https://drive.google.com/file/d/1feYTlsiiLl-DQ0N-FWO3rUMBus1bKZC6/view?usp=sharing', external: true },
+    { title: 'Resume', address: 'https://drive.google.com/file/d/1hP0LgB9OJuGvFaxNBe0X_r8F2OcTW_2g/view?usp=sharing', external: true },
   ];
 
   return (

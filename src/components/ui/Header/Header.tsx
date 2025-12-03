@@ -71,7 +71,7 @@ export default function Header() {
           <Menuitem title='Historical Analyzer' address='/pages/HistoricalAnalyzer#FastAPIDemo' />
           <Menuitem title='Flask Demo' address='/pages/FlaskAPI#Demo' />
           <Menuitem title='Contact Me' address='/pages/ContactMe' /> 
-          <a href="https://drive.google.com/file/d/1feYTlsiiLl-DQ0N-FWO3rUMBus1bKZC6/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center group relative">
+          <a href="https://drive.google.com/file/d/1hP0LgB9OJuGvFaxNBe0X_r8F2OcTW_2g/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center group relative">
             <p className='uppercase hidden sm:inline text-base'>Resume</p>
           </a>
         </nav>

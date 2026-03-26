@@ -67,7 +67,14 @@ const LandingPage: React.FC = () => {
         technologyStack: ["React", "JavaScript", "Python", "FastAPI", "REST", "PostgreSQL", "Render"],
         githubURL: "",
         demoURL: "/pages/HistoricalAnalyzer",
-      }
+      },
+      {
+        title: "POS System",
+        description: "A Point of Sale (POS) system built with React and Node.js, designed for small businesses. It includes features like inventory management, sales tracking, and barcode scanning.",
+        technologyStack: ["React", "Node.js", "Express", "MySQL", "Vercel"],
+        githubURL: "",
+        demoURL: "https://web-nine-lovat-33.vercel.app/account/signup",
+      },
     ]
 
     const projectColumns = distributeProjects(projects) as projectItem[][];
@@ -77,6 +84,7 @@ const LandingPage: React.FC = () => {
       "MishMash App": "https://ik.imagekit.io/kh7xo3apt/WebImages/MishMash.jpg?updatedAt=1758637789305",
       "Flask API": "https://ik.imagekit.io/kh7xo3apt/WebImages/FlaskCode.png?updatedAt=1759490998846",
       "Historical Data Analyzer": "https://ik.imagekit.io/kh7xo3apt/WebImages/AI_Analyzer.png?updatedAt=1762357645325",
+      "POS System": "https://ik.imagekit.io/kh7xo3apt/WebImages/POS.png",
     };
 
     // Section visibility tracking

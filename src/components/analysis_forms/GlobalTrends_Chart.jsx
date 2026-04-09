@@ -251,7 +251,7 @@ const GlobalTrendsChart = () => {
                 <input
                   type="range"
                   min="1816"
-                  max="2010"
+                  max="2006"
                   step="10"
                   value={startYear}
                   onChange={(e) => setStartYear(Number(e.target.value))}
@@ -263,7 +263,7 @@ const GlobalTrendsChart = () => {
                 <input
                   type="range"
                   min="1816"
-                  max="2010"
+                  max="2006"
                   step="10"
                   value={endYear}
                   onChange={(e) => setEndYear(Number(e.target.value))}

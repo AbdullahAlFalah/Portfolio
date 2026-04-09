@@ -18,7 +18,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "ignoreDeprecations": "6.0" // Ignore deprecation warnings for TypeScript 6.0 and above
   },
   "include": [
     "src",

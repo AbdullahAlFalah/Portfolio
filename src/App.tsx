@@ -8,6 +8,7 @@ import Portfolio from './pages/Portfolio';
 import FlaskAPI from './pages/FlaskAPI';
 import HistoricalAnalyzer from './pages/HistoricalAnalyzer';
 import ContactMe from './pages/ContactMe';
+import NotFound from './pages/NotFound';
 import Me from './assets/images/Abdullah.jpg';
 import CodePic from './assets/images/Code.png';
 import Bubbles from './assets/sounds/bubble.mp3';
@@ -448,6 +449,8 @@ export default function App() {
           <Route path="/pages/Portfolio" element={<Portfolio />}/>
           <Route path="/pages/FlaskAPI" element={<FlaskAPI />}/>
           <Route path="/pages/HistoricalAnalyzer" element={<HistoricalAnalyzer />}/>
+          {/* Catch-All Remaining Routes */}
+          <Route path="*" element={<NotFound />}/>
         </Routes>
       </div>
       <div className='footer-container'>

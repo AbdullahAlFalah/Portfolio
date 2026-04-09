@@ -243,7 +243,7 @@ const GlobalTrendsChart = () => {
           {/* Year Range */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Year Range: <span className="text-emerald-600 font-bold">{startYear} - {endYear}</span>
+              Year Range: <span className="text-emerald-600 font-bold">{startYear} - {(endYear-4)}</span>
             </label>
             <div className="space-y-3">
               <div>

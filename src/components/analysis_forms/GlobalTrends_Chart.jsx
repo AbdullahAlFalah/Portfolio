@@ -12,7 +12,7 @@ const GlobalTrendsChart = () => {
   
   // User inputs
   const [startYear, setStartYear] = useState(1816);
-  const [endYear, setEndYear] = useState(2010);
+  const [endYear, setEndYear] = useState(2006);
   const [chartType, setChartType] = useState('bar'); // 'bar', 'line', 'stacked'
   const [dataView, setDataView] = useState('both'); // 'both', 'wars', 'alliances'
   const [groupBy, setGroupBy] = useState(1); // 1, 5, 10 years
@@ -243,7 +243,7 @@ const GlobalTrendsChart = () => {
           {/* Year Range */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Year Range: <span className="text-emerald-600 font-bold">{startYear} - {(endYear-4)}</span>
+              Year Range: <span className="text-emerald-600 font-bold">{startYear} - {endYear}</span>
             </label>
             <div className="space-y-3">
               <div>
@@ -251,7 +251,7 @@ const GlobalTrendsChart = () => {
                 <input
                   type="range"
                   min="1816"
-                  max="2006"
+                  max={endYear} // Ensure start year cannot exceed end year
                   step="10"
                   value={startYear}
                   onChange={(e) => setStartYear(Number(e.target.value))}
@@ -262,7 +262,7 @@ const GlobalTrendsChart = () => {
                 <label className="text-xs text-gray-600">End Year</label>
                 <input
                   type="range"
-                  min="1816"
+                  min={startYear} // Ensure end year cannot be less than start year
                   max="2006"
                   step="10"
                   value={endYear}
